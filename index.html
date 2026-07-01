@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Asif — Full Stack &amp; CMS Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14181F; --paper:#EDEFF3; --surface:#FFFFFF; --accent:#FF7A29;
+    --accent-2:#2F6FED; --line:#D7DBE2; --muted:#5B6472; --green:#1FAE5C; --red:#E5484D;
+    --mono:'JetBrains Mono',ui-monospace,monospace; --sans:'Manrope',-apple-system,sans-serif; --radius:10px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper); color:var(--ink); font-family:var(--sans); line-height:1.55; -webkit-font-smoothing:antialiased;}
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  section{padding:96px 0;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+  @media (max-width:640px){ section{padding:64px 0;} }
+  ::selection{background:var(--accent); color:#fff;}
+  .eyebrow{font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); display:flex; align-items:center; gap:10px; margin-bottom:16px;}
+  .eyebrow::before{content:""; width:18px; height:1px; background:var(--accent); display:inline-block;}
+  h2.title{font-family:var(--mono); font-weight:700; font-size:clamp(26px,3.4vw,38px); letter-spacing:-0.01em; margin-bottom:14px;}
+  .lede{color:var(--muted); font-size:16.5px; max-width:620px; margin-bottom:48px;}
+  header.nav{position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(237,239,243,.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
+  .nav-inner{max-width:1080px; margin:0 auto; padding:0 28px; height:60px; display:flex; align-items:center; justify-content:space-between;}
+  .brand{font-family:var(--mono); font-weight:700; font-size:14.5px; display:flex; align-items:center; gap:8px;}
+  .brand .dot{width:8px; height:8px; border-radius:50%; background:var(--green); box-shadow:0 0 0 3px rgba(31,174,92,.15);}
+  nav.links{display:flex; gap:30px; font-family:var(--mono); font-size:13px; font-weight:500;}
+  nav.links a{color:var(--muted); position:relative; padding:4px 0;}
+  nav.links a:hover{color:var(--ink);}
+  nav.links a::after{content:""; position:absolute; left:0; right:0; bottom:-3px; height:2px; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .25s ease;}
+  nav.links a:hover::after{transform:scaleX(1);}
+  .nav-cta{font-family:var(--mono); font-size:12.5px; font-weight:600; border:1px solid var(--ink); padding:8px 14px; border-radius:6px; background:var(--ink); color:#fff;}
+  .nav-cta:hover{background:var(--accent); border-color:var(--accent);}
+  .burger{display:none; flex-direction:column; gap:4px; cursor:pointer; background:none; border:none;}
+  .burger span{width:20px; height:2px; background:var(--ink); display:block;}
+  @media (max-width:760px){ nav.links{display:none;} .burger{display:flex;} }
+  .hero{padding:150px 0 90px;}
+  .browser{background:var(--surface); border:1px solid var(--line); border-radius:14px; box-shadow:0 30px 60px -30px rgba(20,24,31,.25); overflow:hidden;}
+  .chrome{display:flex; align-items:center; gap:14px; padding:12px 16px; background:#E4E7EC; border-bottom:1px solid var(--line);}
+  .dots{display:flex; gap:7px;}
+  .dots span{width:10px; height:10px; border-radius:50%; display:block;}
+  .dots span:nth-child(1){background:#FF5F57;} .dots span:nth-child(2){background:#FEBC2E;} .dots span:nth-child(3){background:#28C840;}
+  .url-bar{flex:1; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:6px 14px; font-family:var(--mono); font-size:12.5px; color:var(--muted); display:flex; align-items:center; gap:8px;}
+  .url-bar .lock{color:var(--green); font-size:11px;}
+  .tabs-row{display:flex; gap:6px; padding:10px 14px 0; overflow-x:auto;}
+  .tabs-row .tab{font-family:var(--mono); font-size:11.5px; font-weight:600; padding:6px 12px; border-radius:6px 6px 0 0; background:#E4E7EC; color:var(--muted); border:1px solid var(--line); border-bottom:none; white-space:nowrap;}
+  .tabs-row .tab.active{background:var(--surface); color:var(--ink);}
+  .hero-body{padding:56px 44px 60px;}
+  @media (max-width:640px){ .hero-body{padding:36px 22px 40px;} }
+  .hero-photo{width:96px; height:96px; border-radius:50%; object-fit:cover; border:3px solid var(--surface); box-shadow:0 0 0 1px var(--line), 0 12px 26px -12px rgba(20,24,31,.45); margin-bottom:22px;}
+  .hero-kicker{font-family:var(--mono); font-size:12.5px; font-weight:600; color:var(--accent-2); letter-spacing:.06em; margin-bottom:18px;}
+  .hero h1{font-family:var(--mono); font-weight:800; font-size:clamp(32px,5.4vw,58px); line-height:1.06; letter-spacing:-0.02em; margin-bottom:20px;}
+  .hero h1 .accent{color:var(--accent);}
+  #typed{color:var(--accent-2); border-right:2px solid var(--accent-2); padding-right:3px;}
+  .hero p.desc{font-size:17px; color:var(--muted); max-width:600px; margin-bottom:34px;}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:40px;}
+  .btn{font-family:var(--mono); font-weight:600; font-size:13.5px; padding:13px 22px; border-radius:7px; display:inline-flex; align-items:center; gap:8px; border:1px solid transparent; transition:transform .15s ease, box-shadow .15s ease;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--ink); color:#fff;}
+  .btn-primary:hover{box-shadow:0 10px 20px -8px rgba(20,24,31,.5);}
+  .btn-ghost{border-color:var(--line); color:var(--ink); background:var(--surface);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .meta-row{display:flex; gap:28px; flex-wrap:wrap; font-family:var(--mono); font-size:12.5px; color:var(--muted); border-top:1px dashed var(--line); padding-top:22px;}
+  .meta-row span{display:flex; align-items:center; gap:6px;}
+  .meta-row .k{color:var(--ink); font-weight:700;}
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden; margin-top:-1px;}
+  .stat{background:var(--surface); padding:26px 20px; text-align:center;}
+  .stat .num{font-family:var(--mono); font-weight:800; font-size:30px; color:var(--ink);}
+  .stat .num span{color:var(--accent);}
+  .stat .label{font-size:12px; color:var(--muted); margin-top:4px; font-family:var(--mono); letter-spacing:.03em;}
+  @media (max-width:640px){ .stats{grid-template-columns:repeat(2,1fr);} }
+  .devtools{background:var(--surface); border:1px solid var(--line); border-radius:12px; overflow:hidden;}
+  .devtools-bar{display:flex; gap:0; border-bottom:1px solid var(--line); background:#E4E7EC; font-family:var(--mono); font-size:12px; font-weight:600; overflow-x:auto;}
+  .devtools-bar div{padding:11px 18px; color:var(--muted); white-space:nowrap;}
+  .devtools-bar div:first-child{color:var(--ink); background:var(--surface); border-right:1px solid var(--line);}
+  .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:0;}
+  @media (max-width:700px){ .skills-grid{grid-template-columns:1fr;} }
+  .skill-row{padding:22px 26px; border-bottom:1px solid var(--line); border-right:1px solid var(--line);}
+  .skill-row:nth-child(2n){border-right:none;}
+  .skill-row .k{font-family:var(--mono); font-size:11.5px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--accent-2); margin-bottom:10px; display:block;}
+  .tag-list{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{font-family:var(--mono); font-size:12.5px; padding:5px 10px; border-radius:5px; background:var(--paper); border:1px solid var(--line); color:var(--ink);}
+  .commit-log{border-left:2px solid var(--line); margin-left:8px;}
+  .commit{position:relative; padding:0 0 44px 34px;}
+  .commit:last-child{padding-bottom:0;}
+  .commit::before{content:""; position:absolute; left:-7px; top:4px; width:12px; height:12px; border-radius:50%; background:var(--surface); border:2px solid var(--accent);}
+  .commit-head{display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:4px;}
+  .hash{font-family:var(--mono); font-size:12.5px; color:var(--accent); font-weight:700;}
+  .commit-msg{font-family:var(--mono); font-weight:700; font-size:17px;}
+  .commit-meta{font-family:var(--mono); font-size:12px; color:var(--muted); margin-bottom:14px; display:flex; gap:14px; flex-wrap:wrap;}
+  .commit-meta .company{color:var(--accent-2); font-weight:600;}
+  .diff{background:var(--surface); border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  .diff-line{font-family:var(--mono); font-size:13px; padding:8px 14px; border-bottom:1px solid var(--line); display:flex; gap:10px;}
+  .diff-line:last-child{border-bottom:none;}
+  .diff-line .plus{color:var(--green); font-weight:700;}
+  .filters{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px;}
+  .filter-btn{font-family:var(--mono); font-size:12.5px; font-weight:600; padding:9px 15px; border-radius:6px; border:1px solid var(--line); background:var(--surface); color:var(--muted); cursor:pointer;}
+  .filter-btn:hover{border-color:var(--accent-2); color:var(--ink);}
+  .filter-btn.active{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .proj-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media (max-width:860px){ .proj-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .proj-grid{grid-template-columns:1fr;} }
+  .proj-card{background:var(--surface); border:1px solid var(--line); border-radius:10px; overflow:hidden; transition:transform .18s ease, box-shadow .18s ease;}
+  .proj-card:hover{transform:translateY(-4px); box-shadow:0 16px 30px -18px rgba(20,24,31,.35);}
+  .proj-chrome{display:flex; align-items:center; gap:8px; padding:9px 12px; background:#E4E7EC; border-bottom:1px solid var(--line);}
+  .proj-chrome .dots span{width:7px; height:7px;}
+  .proj-chrome .u{font-family:var(--mono); font-size:10.5px; color:var(--muted); background:var(--surface); border-radius:10px; padding:2px 8px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .proj-body{padding:18px;}
+  .proj-body .name{font-weight:700; font-size:15px; margin-bottom:4px;}
+  .proj-body .platform{font-family:var(--mono); font-size:11px; color:var(--accent); font-weight:700; text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px; display:block;}
+  .proj-body a.visit{font-family:var(--mono); font-size:12.5px; color:var(--accent-2); font-weight:600; display:inline-flex; align-items:center; gap:5px;}
+  .proj-body a.visit:hover{text-decoration:underline;}
+  .split{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  @media (max-width:700px){ .split{grid-template-columns:1fr;} }
+  .edu-item{border:1px solid var(--line); background:var(--surface); border-radius:10px; padding:20px 22px; margin-bottom:14px;}
+  .edu-item .deg{font-weight:700; font-size:15.5px; margin-bottom:3px;}
+  .edu-item .school{color:var(--accent-2); font-size:13.5px; font-family:var(--mono);}
+  .edu-item .yr{color:var(--muted); font-size:12.5px; font-family:var(--mono); margin-top:4px;}
+  .course-list li{display:flex; align-items:center; gap:10px; padding:12px 0; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .course-list li:last-child{border-bottom:none;}
+  .course-list .chk{color:var(--green); font-family:var(--mono); font-weight:700;}
+  .tst-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+  @media (max-width:700px){ .tst-grid{grid-template-columns:1fr;} }
+  .tst-card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:24px 26px;}
+  .tst-quote{font-size:15px; color:#2b313c; line-height:1.62; margin-bottom:16px;}
+  .tst-who{font-family:var(--mono); font-size:12.5px; display:flex; align-items:center; gap:8px;}
+  .tst-who .av{width:30px; height:30px; border-radius:50%; background:var(--accent-2); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:12px;}
+  .tst-who .nm{font-weight:700; color:var(--ink);}
+  .tst-who .rl{color:var(--muted);}
+  .proj-body .desc{font-size:12.5px; color:var(--muted); line-height:1.5; margin:2px 0 10px;}
+  .proj-tech{display:flex; flex-wrap:wrap; gap:5px; margin-bottom:12px;}
+  .proj-tech span{font-family:var(--mono); font-size:10px; padding:2px 6px; border-radius:4px; background:var(--paper); border:1px solid var(--line); color:var(--muted);}
+  .svc-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  @media (max-width:860px){ .svc-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .svc-grid{grid-template-columns:1fr;} }
+  .svc-card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:22px 20px;}
+  .svc-card .t{font-family:var(--mono); font-weight:700; font-size:15px; margin-bottom:7px;}
+  .svc-card .t::before{content:"›"; color:var(--accent); margin-right:7px;}
+  .svc-card .d{font-size:13px; color:var(--muted); line-height:1.5;}
+  .vibe-empty{border:1px dashed var(--line); border-radius:12px; padding:48px 20px; text-align:center; color:var(--muted); font-family:var(--mono); font-size:14px; background:var(--surface);}
+  .vibe-empty .zap{font-size:26px; display:block; margin-bottom:10px;}
+  footer{background:var(--ink); color:#fff; padding:80px 0 40px;}
+  footer .wrap{color:#fff;}
+  footer .eyebrow{color:var(--accent);}
+  footer h2.title{color:#fff;}
+  footer .lede{color:#9AA3B2;}
+  .contact-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:56px;}
+  @media (max-width:700px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-card{border:1px solid #2A3040; border-radius:10px; padding:20px; background:#171C26;}
+  .contact-card .k{font-family:var(--mono); font-size:11px; color:#7E8798; text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px; display:block;}
+  .contact-card a, .contact-card span.v{font-size:15px; font-weight:600; color:#fff;}
+  .contact-card a:hover{color:var(--accent);}
+  .foot-bottom{border-top:1px solid #2A3040; padding-top:26px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; font-family:var(--mono); font-size:12px; color:#7E8798;}
+
+  /* ---------- tech stack (orbiting icons) ---------- */
+  .techstack{background:radial-gradient(130% 95% at 50% -12%, #1d1242 0%, #0e0a24 50%, #060218 100%); color:#fff; overflow:hidden; position:relative;}
+  .techstack .eyebrow{color:#A068FF;}
+  .techstack .eyebrow::before{background:#A068FF;}
+  .techstack h2.title{color:#fff;}
+  .techstack .lede{color:#b7b0d6;}
+  .ts-stage{display:flex; align-items:center; justify-content:center; height:760px; opacity:0; animation:tsFade 1.1s cubic-bezier(0.22,1,0.36,1) .15s forwards;}
+  @keyframes tsFade{from{opacity:0; transform:translateY(24px);} to{opacity:1; transform:translateY(0);}}
+  .ts-circles{position:relative; width:720px; height:720px; transform-origin:center center;}
+  .ts-orbit{position:absolute; top:50%; left:50%; border-radius:50%;}
+  .ts-orbit::before{content:""; position:absolute; inset:0; border-radius:50%; padding:1px;
+    background:linear-gradient(180deg, rgba(217,161,255,0) 0%, rgba(217,161,255,1) 43%, rgba(217,161,255,0) 100%);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor; mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite:exclude; pointer-events:none;}
+  .ts-o1{width:353px; height:353px; margin:-176.5px 0 0 -176.5px; animation:tsSpinL 30s linear infinite;}
+  .ts-o2{width:501px; height:501px; margin:-250.5px 0 0 -250.5px; animation:tsSpinR 40s linear infinite;}
+  .ts-o3{width:649px; height:649px; margin:-324.5px 0 0 -324.5px; animation:tsSpinR 50s linear infinite;}
+  .ts-o4{width:797px; height:797px; margin:-398.5px 0 0 -398.5px; animation:tsSpinL 60s linear infinite;}
+  @keyframes tsSpinL{to{transform:rotate(-360deg);}}
+  @keyframes tsSpinR{to{transform:rotate(360deg);}}
+  .ts-slot{position:absolute; top:50%; left:50%;}
+  .ts-chip{width:60px; height:60px; border-radius:16px; background:#fff; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 0 1px rgba(255,255,255,.08), 0 8px 22px -6px rgba(0,0,0,.5);}
+  .ts-chip img{width:32px; height:32px; object-fit:contain;}
+  .ts-cr1{animation:tsSpinR 30s linear infinite;}
+  .ts-cr2{animation:tsSpinL 40s linear infinite;}
+  .ts-cr3{animation:tsSpinL 50s linear infinite;}
+  .ts-cr4{animation:tsSpinR 60s linear infinite;}
+  .ts-center{position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; z-index:6; pointer-events:none;}
+  .ts-center .num{font-family:var(--mono); font-size:56px; font-weight:800; color:#fff; line-height:1; letter-spacing:-1px;}
+  .ts-center .num span{color:#A068FF;}
+  .ts-center .lbl{font-family:var(--mono); font-size:13px; font-weight:600; color:#b7b0d6; margin-top:8px; text-transform:uppercase; letter-spacing:.08em;}
+  @media (max-width:1080px){ .ts-stage{height:620px;} .ts-circles{transform:scale(.8);} }
+  @media (max-width:760px){ .ts-stage{height:430px;} .ts-circles{transform:scale(.55);} }
+  @media (max-width:520px){ .ts-stage{height:330px;} .ts-circles{transform:scale(.42);} .ts-center .num{font-size:48px;} }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="dot"></span> muhammad.asif</div>
+    <nav class="links">
+      <a href="#profile">profile</a>
+      <a href="#skills">skills</a>
+      <a href="#tech">tech</a>
+      <a href="#experience">experience</a>
+      <a href="#projects">projects</a>
+      <a href="#vibe">vibe</a>
+      <a href="#education">education</a>
+      <a href="#testimonials">reviews</a>
+    </nav>
+    <a href="#contact" class="nav-cta">Hire me →</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="browser">
+        <div class="chrome">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="url-bar"><span class="lock">🔒</span> vre.us/wp-content/uploads/2026/developer/public/</div>
+        </div>
+        <div class="tabs-row">
+                      <div class="tab active">WordPress</div>
+                      <div class="tab">Shopify</div>
+                      <div class="tab">Wix</div>
+                      <div class="tab">Webflow</div>
+                      <div class="tab">Squarespace</div>
+                      <div class="tab">HubSpot</div>
+                  </div>
+
+        <div class="hero-body">
+                    <div class="hero-kicker">// AVAILABLE FOR FULL-TIME &amp; CONTRACT WORK — KARACHI, PK</div>
+          <h1>I turn designs into live <span class="accent">production</span> sites.<br><span id="typed"></span></h1>
+          <p class="desc">Full stack &amp; CMS developer with 5+ years shipping responsive eCommerce and marketing sites across WordPress, Shopify, Wix, Webflow, Squarespace and HubSpot — currently leading a development team from design handoff to deployment.</p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">View live projects ↓</a>
+            <a href="mailto:muhammad1111asif@gmail.com" class="btn btn-ghost">muhammad1111asif@gmail.com</a>
+          </div>
+
+          <div class="meta-row">
+                          <span><span class="k">5+ yrs</span> experience</span>
+                          <span><span class="k">40+</span> sites shipped</span>
+                          <span><span class="k">6</span> CMS platforms</span>
+                          <span><span class="k">Currently:</span> Team Lead, Media Revolution</span>
+                      </div>
+        </div>
+
+        <div class="stats">
+                      <div class="stat"><div class="num"><span>5+</span></div><div class="label">YEARS EXPERIENCE</div></div>
+                      <div class="stat"><div class="num"><span>40+</span></div><div class="label">LIVE PROJECTS</div></div>
+                      <div class="stat"><div class="num"><span>2</span></div><div class="label">TEAMS LED</div></div>
+                      <div class="stat"><div class="num"><span>6</span></div><div class="label">CMS PLATFORMS</div></div>
+                  </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFILE -->
+  <section id="profile">
+    <div class="wrap">
+      <div class="eyebrow">01 · Profile</div>
+      <h2 class="title">Ships fast. Builds it right.</h2>
+      <p class="lede">A quick read on how I work and what I&#039;ve built.</p>
+      <p style="max-width:720px; font-size:16px; color:#2b313c;">I design, build and maintain responsive eCommerce and static websites on WordPress, Shopify, Wix and Squarespace — converting Figma, PSD and XD files into pixel-perfect, production-ready builds. On the front end I work in HTML5, CSS3, JavaScript and Bootstrap; on the back end, PHP, Laravel and MySQL. Day to day that means custom theme and plugin development, WooCommerce builds, API integrations, VPS hosting and deployment — and, for the past three years, leading the developers who ship it all alongside me.</p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+    <section id="services" style="padding-top:0;">
+    <div class="wrap">
+      <div class="eyebrow">01b · Services</div>
+      <h2 class="title">What I do.</h2>
+      <p class="lede">End-to-end web solutions across every major platform.</p>
+      <div class="svc-grid">
+                  <div class="svc-card">
+            <div class="t">CMS Development</div>
+            <div class="d">Custom WordPress, Shopify, Wix, Webflow, Squarespace &amp; HubSpot builds.</div>          </div>
+                  <div class="svc-card">
+            <div class="t">E-Commerce Solutions</div>
+            <div class="d">WooCommerce &amp; Shopify stores with PageFly, optimized conversion flows.</div>          </div>
+                  <div class="svc-card">
+            <div class="t">Custom Development</div>
+            <div class="d">Bespoke themes, plugins, WIX Velo code, Laravel &amp; API integrations.</div>          </div>
+                  <div class="svc-card">
+            <div class="t">Server Management</div>
+            <div class="d">VPS hosting, cPanel, domain management &amp; deployment configuration.</div>          </div>
+              </div>
+    </div>
+  </section>
+  
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="eyebrow">02 · Skills</div>
+      <h2 class="title">Inspect panel</h2>
+      <p class="lede">The stack, tool by tool.</p>
+
+      <div class="devtools">
+        <div class="devtools-bar"><div>Elements</div><div>Console</div><div>Sources</div><div>Network</div></div>
+        <div class="skills-grid">
+                      <div class="skill-row">
+              <span class="k">CMS Platforms</span>
+              <div class="tag-list">
+                                  <span class="tag">WordPress</span>
+                                  <span class="tag">Shopify</span>
+                                  <span class="tag">Wix</span>
+                                  <span class="tag">Squarespace</span>
+                                  <span class="tag">HubSpot</span>
+                                  <span class="tag">Webflow</span>
+                              </div>
+            </div>
+                      <div class="skill-row">
+              <span class="k">Front-End</span>
+              <div class="tag-list">
+                                  <span class="tag">HTML5</span>
+                                  <span class="tag">CSS3</span>
+                                  <span class="tag">JavaScript</span>
+                                  <span class="tag">jQuery</span>
+                                  <span class="tag">AJAX</span>
+                                  <span class="tag">Bootstrap</span>
+                              </div>
+            </div>
+                      <div class="skill-row">
+              <span class="k">Page Builders</span>
+              <div class="tag-list">
+                                  <span class="tag">Elementor</span>
+                                  <span class="tag">Divi</span>
+                                  <span class="tag">WPBakery</span>
+                                  <span class="tag">ACF</span>
+                                  <span class="tag">PageFly</span>
+                                  <span class="tag">Wix Velo</span>
+                              </div>
+            </div>
+                      <div class="skill-row">
+              <span class="k">Back-End &amp; Data</span>
+              <div class="tag-list">
+                                  <span class="tag">PHP</span>
+                                  <span class="tag">Laravel</span>
+                                  <span class="tag">MySQL</span>
+                              </div>
+            </div>
+                      <div class="skill-row">
+              <span class="k">eCommerce</span>
+              <div class="tag-list">
+                                  <span class="tag">WooCommerce</span>
+                                  <span class="tag">Shopify Store Setup</span>
+                              </div>
+            </div>
+                      <div class="skill-row">
+              <span class="k">Hosting &amp; Ops</span>
+              <div class="tag-list">
+                                  <span class="tag">VPS Management</span>
+                                  <span class="tag">Domain Transfer</span>
+                                  <span class="tag">Deployment</span>
+                              </div>
+            </div>
+                      <div class="skill-row">
+              <span class="k">Design Conversion</span>
+              <div class="tag-list">
+                                  <span class="tag">PSD → Live</span>
+                                  <span class="tag">XD → Live</span>
+                                  <span class="tag">Figma → Live</span>
+                              </div>
+            </div>
+                      <div class="skill-row">
+              <span class="k">Tools</span>
+              <div class="tag-list">
+                                  <span class="tag">Git</span>
+                                  <span class="tag">GitHub</span>
+                                  <span class="tag">Cursor AI</span>
+                                  <span class="tag">MS Office</span>
+                              </div>
+            </div>
+                  </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK (orbiting icons) -->
+    <section id="tech" class="techstack">
+    <div class="wrap">
+      <div class="eyebrow">02b · Tech Stack</div>
+      <h2 class="title">Tools in orbit.</h2>
+      <p class="lede">The frameworks, CMS platforms and languages I build with every day.</p>
+    </div>
+    <div class="ts-stage">
+      <div class="ts-circles">
+        <div class="ts-orbit ts-o4"><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(30.00deg) translate(399.0px) rotate(-30.00deg)"><div class="ts-chip ts-cr4"><img src="https://cdn.simpleicons.org/jquery/0769AD" alt="jQuery" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(81.43deg) translate(399.0px) rotate(-81.43deg)"><div class="ts-chip ts-cr4"><img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML5" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(132.86deg) translate(399.0px) rotate(-132.86deg)"><div class="ts-chip ts-cr4"><img src="https://cdn.simpleicons.org/squarespace/000000" alt="Squarespace" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(184.29deg) translate(399.0px) rotate(-184.29deg)"><div class="ts-chip ts-cr4"><img src="https://cdn.simpleicons.org/hubspot/FF7A59" alt="HubSpot" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(235.71deg) translate(399.0px) rotate(-235.71deg)"><div class="ts-chip ts-cr4"><img src="https://cdn.simpleicons.org/elementor/92003B" alt="Elementor" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(287.14deg) translate(399.0px) rotate(-287.14deg)"><div class="ts-chip ts-cr4"><img src="https://cdn.simpleicons.org/git/F05032" alt="Git" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(338.57deg) translate(399.0px) rotate(-338.57deg)"><div class="ts-chip ts-cr4"><img src="https://cdn.simpleicons.org/github/181717" alt="GitHub" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div></div>
+        <div class="ts-orbit ts-o3"><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(130.00deg) translate(325.0px) rotate(-130.00deg)"><div class="ts-chip ts-cr3"><img src="https://cdn.simpleicons.org/nodedotjs/5FA04E" alt="Node.js" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(202.00deg) translate(325.0px) rotate(-202.00deg)"><div class="ts-chip ts-cr3"><img src="https://cdn.simpleicons.org/wix/0C6EFC" alt="Wix" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(274.00deg) translate(325.0px) rotate(-274.00deg)"><div class="ts-chip ts-cr3"><img src="https://cdn.simpleicons.org/webflow/146EF5" alt="Webflow" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(346.00deg) translate(325.0px) rotate(-346.00deg)"><div class="ts-chip ts-cr3"><img src="https://cdn.simpleicons.org/woocommerce/96588A" alt="WooCommerce" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(418.00deg) translate(325.0px) rotate(-418.00deg)"><div class="ts-chip ts-cr3"><img src="https://cdn.simpleicons.org/bootstrap/7952B3" alt="Bootstrap" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div></div>
+        <div class="ts-orbit ts-o2"><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(60.00deg) translate(251.0px) rotate(-60.00deg)"><div class="ts-chip ts-cr2"><img src="https://cdn.simpleicons.org/wordpress/21759B" alt="WordPress" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(150.00deg) translate(251.0px) rotate(-150.00deg)"><div class="ts-chip ts-cr2"><img src="https://cdn.simpleicons.org/shopify/7AB55C" alt="Shopify" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(240.00deg) translate(251.0px) rotate(-240.00deg)"><div class="ts-chip ts-cr2"><img src="https://cdn.simpleicons.org/mysql/4479A1" alt="MySQL" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(330.00deg) translate(251.0px) rotate(-330.00deg)"><div class="ts-chip ts-cr2"><img src="https://cdn.simpleicons.org/javascript/F7DF1E" alt="JavaScript" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div></div>
+        <div class="ts-orbit ts-o1"><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(270.00deg) translate(177.0px) rotate(-270.00deg)"><div class="ts-chip ts-cr1"><img src="https://cdn.simpleicons.org/laravel/FF2D20" alt="Laravel" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div><div class="ts-slot" style="transform:translate(-50%,-50%) rotate(450.00deg) translate(177.0px) rotate(-450.00deg)"><div class="ts-chip ts-cr1"><img src="https://cdn.simpleicons.org/php/777BB4" alt="PHP" loading="lazy" onerror="this.closest('.ts-slot').style.display='none'"></div></div></div>
+        <div class="ts-center">
+          <div class="num" id="techNum" data-target="18+">18+</div>
+          <div class="lbl">Technologies</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="eyebrow">03 · Experience</div>
+      <h2 class="title">git log --author=asif</h2>
+      <p class="lede">Every role, as a commit.</p>
+
+      <div class="commit-log">
+                  <div class="commit">
+            <div class="commit-head">
+              <span class="hash">#a1f92c</span>
+              <span class="commit-msg">Team Lead (CMS Developer)</span>
+            </div>
+            <div class="commit-meta">
+              <span class="company">Media Revolution</span>
+              <span>Gulshan-e-Iqbal, Karachi</span>
+              <span>04/2025 → 04/2026</span>
+            </div>
+            <div class="diff">
+                              <div class="diff-line"><span class="plus">+</span> Led dev projects across WordPress, Shopify, Wix, Squarespace &amp; HubSpot</div>
+                              <div class="diff-line"><span class="plus">+</span> Managed a team of developers for on-time, high-quality delivery</div>
+                              <div class="diff-line"><span class="plus">+</span> Built &amp; customized responsive eCommerce and static sites</div>
+                              <div class="diff-line"><span class="plus">+</span> Shipped custom CMS solutions and Wix Velo custom coding</div>
+                              <div class="diff-line"><span class="plus">+</span> Owned VPS hosting, deployment, domains and optimization</div>
+                          </div>
+          </div>
+                  <div class="commit">
+            <div class="commit-head">
+              <span class="hash">#7d0e14</span>
+              <span class="commit-msg">Team Lead (CMS Developer)</span>
+            </div>
+            <div class="commit-meta">
+              <span class="company">Matrix Analytics</span>
+              <span>Shahrah-e-Faisal, Karachi</span>
+              <span>09/2023 → 04/2025</span>
+            </div>
+            <div class="diff">
+                              <div class="diff-line"><span class="plus">+</span> Developed &amp; maintained sites on WordPress, Shopify, Webflow, Wix, Squarespace, HubSpot</div>
+                              <div class="diff-line"><span class="plus">+</span> Converted Figma &amp; PSD designs into pixel-perfect responsive builds</div>
+                              <div class="diff-line"><span class="plus">+</span> Built custom WordPress themes &amp; plugins per project spec</div>
+                              <div class="diff-line"><span class="plus">+</span> Integrated APIs and optimized performance for better UX</div>
+                              <div class="diff-line"><span class="plus">+</span> Led the dev team across multiple concurrent CMS projects</div>
+                          </div>
+          </div>
+                  <div class="commit">
+            <div class="commit-head">
+              <span class="hash">#4b8a02</span>
+              <span class="commit-msg">Executive (Backend Developer)</span>
+            </div>
+            <div class="commit-meta">
+              <span class="company">AIMVIZ</span>
+              <span>Gulshan-e-Iqbal, Karachi</span>
+              <span>09/2022 → 08/2023</span>
+            </div>
+            <div class="diff">
+                              <div class="diff-line"><span class="plus">+</span> Converted static HTML layouts into fully functional WordPress sites</div>
+                              <div class="diff-line"><span class="plus">+</span> Developed custom WordPress plugins &amp; backend functionality</div>
+                              <div class="diff-line"><span class="plus">+</span> Worked in PHP, JavaScript, AJAX, jQuery &amp; MySQL</div>
+                          </div>
+          </div>
+                  <div class="commit">
+            <div class="commit-head">
+              <span class="hash">#f13c76</span>
+              <span class="commit-msg">Junior Web App Developer</span>
+            </div>
+            <div class="commit-meta">
+              <span class="company">P2P Track</span>
+              <span>Shahrah-e-Faisal, Karachi</span>
+              <span>05/2021 → 09/2022</span>
+            </div>
+            <div class="diff">
+                              <div class="diff-line"><span class="plus">+</span> Built responsive page layouts and shipped client feedback changes</div>
+                              <div class="diff-line"><span class="plus">+</span> Worked on Core PHP, JavaScript, AJAX, jQuery &amp; MySQL apps</div>
+                              <div class="diff-line"><span class="plus">+</span> Took part in deployment, testing &amp; code integration</div>
+                          </div>
+          </div>
+                  <div class="commit">
+            <div class="commit-head">
+              <span class="hash">#0091ab</span>
+              <span class="commit-msg">Web App Developer (Intern)</span>
+            </div>
+            <div class="commit-meta">
+              <span class="company">P2P Track</span>
+              <span>Shahrah-e-Faisal, Karachi</span>
+              <span>02/2021 → 05/2021</span>
+            </div>
+            <div class="diff">
+                              <div class="diff-line"><span class="plus">+</span> Programming languages: Java</div>
+                              <div class="diff-line"><span class="plus">+</span> Mobile development: Android Studio</div>
+                          </div>
+          </div>
+              </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="eyebrow">04 · Projects</div>
+      <h2 class="title">Open tabs</h2>
+      <p class="lede">Live client sites, filterable by platform.</p>
+
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+                  <button class="filter-btn" data-filter="wordpress">WordPress</button>
+                  <button class="filter-btn" data-filter="shopify">Shopify</button>
+                  <button class="filter-btn" data-filter="wix">Wix</button>
+                  <button class="filter-btn" data-filter="webflow">Webflow</button>
+                  <button class="filter-btn" data-filter="other">Other</button>
+              </div>
+
+      <div class="proj-grid" id="projGrid">
+                  <div class="proj-card" data-cat="wordpress">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">bellarinj.com</div></div>
+            <div class="proj-body">
+              <span class="platform">WordPress</span>
+              <div class="name">Bellarinj</div>
+              <div class="desc">A professional WordPress website for a beauty and wellness brand with custom theme development and WooCommerce integration.</div>                              <div class="proj-tech">
+                  <span>WordPress</span><span>PHP</span><span>WooCommerce</span><span>JavaScript</span>                </div>
+                            <a class="visit" href="https://www.bellarinj.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="wordpress">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">johnskillerprotein.com</div></div>
+            <div class="proj-body">
+              <span class="platform">WordPress</span>
+              <div class="name">John&#039;s Killer Protein</div>
+              <div class="desc">A high-performance WordPress e-commerce site for protein supplements with custom product configurator and subscription system.</div>                              <div class="proj-tech">
+                  <span>WordPress</span><span>WooCommerce</span><span>PHP</span><span>JavaScript</span>                </div>
+                            <a class="visit" href="https://johnskillerprotein.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="wordpress">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">mayashinebooks.com</div></div>
+            <div class="proj-body">
+              <span class="platform">WordPress</span>
+              <div class="name">Maya Shine Books</div>
+              <div class="desc">An independent bookstore WordPress site with WooCommerce, featuring book previews and author events calendar.</div>                              <div class="proj-tech">
+                  <span>WordPress</span><span>WooCommerce</span><span>PHP</span><span>JavaScript</span>                </div>
+                            <a class="visit" href="https://mayashinebooks.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="wordpress">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">entarjaknits.com</div></div>
+            <div class="proj-body">
+              <span class="platform">WordPress</span>
+              <div class="name">Entarja Knits</div>
+                                          <a class="visit" href="https://entarjaknits.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="shopify">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">lullababyusa.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Shopify · PageFly</span>
+              <div class="name">Lulla Baby USA</div>
+              <div class="desc">A premium baby products e-commerce store built on Shopify with PageFly builder, featuring custom layouts and optimized conversion flow.</div>                              <div class="proj-tech">
+                  <span>Shopify</span><span>PageFly Builder</span><span>Liquid</span><span>JavaScript</span>                </div>
+                            <a class="visit" href="https://lullababyusa.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="wordpress">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">360socialmedia.ca</div></div>
+            <div class="proj-body">
+              <span class="platform">WordPress</span>
+              <div class="name">360 Social Media</div>
+              <div class="desc">A digital marketing agency WordPress website with portfolio showcase, team profiles, and service pages.</div>                              <div class="proj-tech">
+                  <span>WordPress</span><span>PHP</span><span>ACF</span><span>JavaScript</span>                </div>
+                            <a class="visit" href="https://360socialmedia.ca/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="shopify">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">johnsonsprintwear.co.uk</div></div>
+            <div class="proj-body">
+              <span class="platform">Shopify</span>
+              <div class="name">Johnsons Printwear</div>
+                                          <a class="visit" href="http://johnsonsprintwear.co.uk/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="shopify">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">sapserveracess.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Shopify</span>
+              <div class="name">SAP Server Access</div>
+                                          <a class="visit" href="https://sapserveracess.com" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="wix">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">washingtonsdetailing.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Wix</span>
+              <div class="name">Washingtons Detailing</div>
+              <div class="desc">A professional car detailing service website built on WIX with custom Velo code for booking system and gallery features.</div>                              <div class="proj-tech">
+                  <span>WIX</span><span>Velo (JavaScript)</span><span>WIX Database</span><span>CSS</span>                </div>
+                            <a class="visit" href="https://www.washingtonsdetailing.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="wix">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">ecopremiumcleaning.co.uk</div></div>
+            <div class="proj-body">
+              <span class="platform">Wix</span>
+              <div class="name">Eco Premium Cleaning</div>
+                                          <a class="visit" href="https://www.ecopremiumcleaning.co.uk/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="webflow">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">virtualmike.ai</div></div>
+            <div class="proj-body">
+              <span class="platform">Webflow</span>
+              <div class="name">Virtual Mike AI</div>
+              <div class="desc">A modern AI platform landing page built with Webflow, featuring custom animations and interactive elements.</div>                              <div class="proj-tech">
+                  <span>Webflow</span><span>JavaScript</span><span>Webflow CMS</span><span>CSS Animations</span>                </div>
+                            <a class="visit" href="https://virtualmike.ai/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">toccoabiz.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Client Site</span>
+              <div class="name">Tocco A Biz</div>
+                                          <a class="visit" href="http://toccoabiz.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">thestoreonline.com.au</div></div>
+            <div class="proj-body">
+              <span class="platform">Client Site</span>
+              <div class="name">The Store Online</div>
+                                          <a class="visit" href="https://thestoreonline.com.au/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">elegantewesternwear.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Client Site</span>
+              <div class="name">Elegante Western Wear</div>
+                                          <a class="visit" href="https://elegantewesternwear.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">shimatradinglimited.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Client Site</span>
+              <div class="name">Shima Trading Limited</div>
+                                          <a class="visit" href="https://www.shimatradinglimited.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">usfts.us</div></div>
+            <div class="proj-body">
+              <span class="platform">Client Site</span>
+              <div class="name">US Forces Tactical Supply</div>
+                                          <a class="visit" href="https://usfts.us/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">pasupply.it</div></div>
+            <div class="proj-body">
+              <span class="platform">Client Site</span>
+              <div class="name">Pa Supply</div>
+                                          <a class="visit" href="https://pasupply.it" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">altrotech.pt</div></div>
+            <div class="proj-body">
+              <span class="platform">Client Site</span>
+              <div class="name">Altrotech</div>
+                                          <a class="visit" href="https://altrotech.pt" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">tacbolt.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Client Site</span>
+              <div class="name">Tacbolt</div>
+                                          <a class="visit" href="https://tacbolt.com" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">usforcestactical.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Client Site</span>
+              <div class="name">US Forces Tactical</div>
+                                          <a class="visit" href="https://usforcestactical.com" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">vre.us</div></div>
+            <div class="proj-body">
+              <span class="platform">Client Site</span>
+              <div class="name">VRE</div>
+                                          <a class="visit" href="https://vre.us" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">ecommetierventures.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Client Site</span>
+              <div class="name">Ecommet Ventures</div>
+                                          <a class="visit" href="https://ecommetierventures.com" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">aveelectric.elegantewesternwear.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Sub-store</span>
+              <div class="name">Ave Electric</div>
+                                          <a class="visit" href="https://aveelectric.elegantewesternwear.com" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">junkmione.elegantewesternwear.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Sub-store</span>
+              <div class="name">Junk Mione</div>
+                                          <a class="visit" href="https://junkmione.elegantewesternwear.com" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">ashchimneytwo.elegantewesternwear.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Sub-store</span>
+              <div class="name">Ash Chimney Two</div>
+                                          <a class="visit" href="https://ashchimneytwo.elegantewesternwear.com" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">junkremovals.elegantewesternwear.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Sub-store</span>
+              <div class="name">Junk Removals</div>
+                                          <a class="visit" href="https://junkremovals.elegantewesternwear.com" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">promcoast.elegantewesternwear.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Sub-store</span>
+              <div class="name">Promcoast</div>
+                                          <a class="visit" href="https://promcoast.elegantewesternwear.com" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                  <div class="proj-card" data-cat="other">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">junkteens.elegantwesternwear.com</div></div>
+            <div class="proj-body">
+              <span class="platform">Sub-store</span>
+              <div class="name">Junk Teens</div>
+                                          <a class="visit" href="https://junkteens.elegantwesternwear.com" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+              </div>
+
+              <p style="margin-top:36px; font-family:var(--mono); font-size:13px; color:var(--muted);">Also on GitHub — Shipsearch (HTML/CSS/JS/PHP), Document Key (HTML/CSS/JS/PHP), Auto Fill Form System (WordPress plugin).</p>
+          </div>
+  </section>
+
+  <!-- VIBE CODING -->
+  <section id="vibe">
+    <div class="wrap">
+      <div class="eyebrow">⚡ Vibe Coding</div>
+      <h2 class="title">Vibe Coding Projects</h2>
+      <p class="lede">Projects built fast with AI assistance — ideas shipped in hours, not weeks. Real products, real outcomes, powered by modern AI tooling.</p>
+
+              <div class="vibe-empty"><span class="zap">⚡</span>Projects coming soon — check back soon.</div>
+          </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="wrap">
+      <div class="eyebrow">05 · Education</div>
+      <h2 class="title">Foundations</h2>
+      <p class="lede">Formal study and short courses along the way.</p>
+
+      <div class="split">
+        <div>
+                      <div class="edu-item">
+              <div class="deg">Associate Degree of Science — Engineering</div>
+              <div class="school">Shah Abdul Latif University, Khairpur, Sindh</div>
+              <div class="yr">2020 – 2023</div>
+            </div>
+                      <div class="edu-item">
+              <div class="deg">Diploma in IT</div>
+              <div class="school">Aligarh Institute of Technology, Karachi</div>
+              <div class="yr">08/2018 · Microprocessor &amp; Architecture, Computer Programming, Web Development</div>
+            </div>
+                  </div>
+        <div>
+          <ul class="course-list">
+                          <li><span class="chk">✓</span> Cyber Security &amp; Ethical Hacking — NED University <em style="color:var(--muted); font-style:normal;">(in progress)</em></li>
+                          <li><span class="chk">✓</span> Mobile Application &amp; Web Development — Aptech Learning Center</li>
+                          <li><span class="chk">✓</span> Office Automation — Indus Public College</li>
+                          <li><span class="chk">✓</span> C.I.T — Dow University Vocational Training Center (D.U.H.S)</li>
+                      </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+    <section id="testimonials">
+    <div class="wrap">
+      <div class="eyebrow">07 · Testimonials</div>
+      <h2 class="title">What clients say.</h2>
+      <p class="lede">A few words from the people I have shipped for.</p>
+
+      <div class="tst-grid">
+                  <div class="tst-card">
+            <p class="tst-quote">“Muhammad is an exceptional team lead and developer. His expertise across multiple CMS platforms (WordPress, Shopify, HubSpot, Wix) is truly impressive. He delivered high-quality solutions consistently and led his team with excellence.”</p>
+            <div class="tst-who">
+              <span class="av">J</span>
+              <span><span class="nm">James Patterson</span> · <span class="rl">CEO, Media Revolution</span></span>
+            </div>
+          </div>
+                  <div class="tst-card">
+            <p class="tst-quote">“Working with Muhammad was fantastic. His custom WordPress solutions and API integrations were implemented flawlessly. He has a great eye for performance optimization and always delivered ahead of deadlines.”</p>
+            <div class="tst-who">
+              <span class="av">S</span>
+              <span><span class="nm">Sarah Mitchell</span> · <span class="rl">Project Manager, Matrix Analytics</span></span>
+            </div>
+          </div>
+                  <div class="tst-card">
+            <p class="tst-quote">“Muhammad built our Shopify store with PageFly and the results exceeded expectations. The site is fast, beautiful, and converts really well. His attention to mobile optimization was particularly impressive.”</p>
+            <div class="tst-who">
+              <span class="av">D</span>
+              <span><span class="nm">David Thompson</span> · <span class="rl">Marketing Director, Lullababyusa</span></span>
+            </div>
+          </div>
+                  <div class="tst-card">
+            <p class="tst-quote">“The WIX website Muhammad developed with custom Velo coding is exactly what we needed. The booking system works perfectly and our customers love the before/after gallery. Highly professional work!”</p>
+            <div class="tst-who">
+              <span class="av">R</span>
+              <span><span class="nm">Rachel Green</span> · <span class="rl">Owner, Washington&#039;s Detailing</span></span>
+            </div>
+          </div>
+                  <div class="tst-card">
+            <p class="tst-quote">“Muhammad&#039;s backend development skills are top-notch. He converted complex HTML layouts to WordPress efficiently and his custom plugins were well-coded and maintainable. A pleasure to work with.”</p>
+            <div class="tst-who">
+              <span class="av">M</span>
+              <span><span class="nm">Michael Roberts</span> · <span class="rl">Technical Director, AIMVIZ</span></span>
+            </div>
+          </div>
+              </div>
+    </div>
+  </section>
+  
+</main>
+
+<!-- FOOTER / CONTACT -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="eyebrow">06 · Contact</div>
+    <h2 class="title">Let&#039;s ship something.</h2>
+    <p class="lede">Open to full-time roles and freelance CMS/web projects.</p>
+
+    <div class="contact-grid">
+      <div class="contact-card"><span class="k">Email</span><a href="mailto:muhammad1111asif@gmail.com">muhammad1111asif@gmail.com</a></div>
+      <div class="contact-card"><span class="k">Phone</span><a href="tel:+923442509080">+92 344 2509080</a></div>
+              <div class="contact-card"><span class="k">WhatsApp</span><a href="https://wa.me/923442509080" target="_blank" rel="noopener">+923442509080</a></div>
+            <div class="contact-card"><span class="k">Location</span><span class="v">Gulshan-e-Iqbal, Karachi, Pakistan</span></div>
+    </div>
+
+              <div class="contact-grid" style="margin-bottom:34px;">
+        <div class="contact-card"><span class="k">GitHub</span><a href="https://github.com/asifaslamibu" target="_blank" rel="noopener">github.com/asifaslamibu</a></div>        <div class="contact-card"><span class="k">LinkedIn</span><a href="https://www.linkedin.com/in/asifaslamofficial/" target="_blank" rel="noopener">linkedin.com/in/asifaslamofficial/</a></div>        <div class="contact-card"><span class="k">Facebook</span><a href="https://www.facebook.com/muhammad.asif.1111/" target="_blank" rel="noopener">facebook.com/muhammad.asif.1111/</a></div>      </div>
+              <p style="font-family:var(--mono); font-size:12.5px; color:#7E8798; margin:-30px 0 40px;">⏱ Response time: Usually within 24 hours</p>
+    
+    <div class="foot-bottom">
+      <span>© 2026 Muhammad Asif — Full Stack &amp; CMS Developer</span>
+      <span>Built with PHP · MySQL</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // typing effect (words DB se aate hain)
+  (function(){
+    const clean = ["WordPress developer.","Shopify builder.","Wix & Webflow.","Team Lead."];
+    const el = document.getElementById('typed');
+    if(!el || !clean.length) return;
+    let wi = 0, ci = 0, deleting = false;
+    function tick(){
+      const word = clean[wi];
+      if(!deleting){
+        ci++; el.textContent = word.slice(0, ci);
+        if(ci === word.length){ deleting = true; setTimeout(tick, 1200); return; }
+      } else {
+        ci--; el.textContent = word.slice(0, ci);
+        if(ci === 0){ deleting = false; wi = (wi+1) % clean.length; }
+      }
+      setTimeout(tick, deleting ? 45 : 75);
+    }
+    tick();
+  })();
+
+  // project filters
+  (function(){
+    const btns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.proj-card');
+    btns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        btns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        cards.forEach(c=>{ c.style.display = (f==='all' || c.dataset.cat===f) ? '' : 'none'; });
+      });
+    });
+  })();
+
+  // tech-stack center count-up (view me aane par chale)
+  (function(){
+    const el = document.getElementById('techNum');
+    if(!el) return;
+    const raw = el.dataset.target || '';
+    const target = parseInt(raw.replace(/[^0-9]/g,''), 10) || 0;
+    const suffix = raw.replace(/[0-9]/g,'');   // e.g. "+"
+    let done = false;
+    const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+    function animate(){
+      if(done) return; done = true;
+      const dur = 1800, start = performance.now();
+      function frame(now){
+        const t = Math.min((now - start)/dur, 1);
+        el.textContent = Math.round(easeOutCubic(t)*target) + suffix;
+        if(t < 1) requestAnimationFrame(frame);
+        else el.innerHTML = target + '<span>' + suffix + '</span>';
+      }
+      requestAnimationFrame(frame);
+    }
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(en=>{ if(en.isIntersecting){ animate(); io.disconnect(); } });
+      }, {threshold:.4});
+      io.observe(el);
+    } else { animate(); }
+  })();
+
+  // hero chrome tabs (cosmetic)
+  document.querySelectorAll('.tabs-row .tab').forEach(t=>{
+    t.addEventListener('click', ()=>{
+      document.querySelectorAll('.tabs-row .tab').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
