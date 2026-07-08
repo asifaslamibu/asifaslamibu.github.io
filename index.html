@@ -19,7 +19,7 @@
   a{color:inherit; text-decoration:none;}
   ul{list-style:none;}
   section{padding:96px 0;}
-  .wrap{max-width:1250px; margin:0 auto; padding:0 28px;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
   @media (max-width:640px){ section{padding:64px 0;} }
   ::selection{background:var(--accent); color:#fff;}
   .eyebrow{font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); display:flex; align-items:center; gap:10px; margin-bottom:16px;}
@@ -111,20 +111,40 @@
   .proj-chrome{display:flex; align-items:center; gap:8px; padding:9px 12px; background:#E4E7EC; border-bottom:1px solid var(--line);}
   .proj-chrome .dots span{width:7px; height:7px;}
   .proj-chrome .u{font-family:var(--mono); font-size:10.5px; color:var(--muted); background:var(--surface); border-radius:10px; padding:2px 8px; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .proj-thumb{display:block; position:relative; height:158px; overflow:hidden; border-bottom:1px solid var(--line);
+    background:var(--paper) linear-gradient(135deg,#e9ecf1,#f6f7f9);}
+  .proj-thumb::after{content:"loading preview…"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-size:11px; color:var(--muted); z-index:0;}
+  .proj-thumb img{position:relative; z-index:1; width:100%; height:100%; object-fit:cover; object-position:top center; transition:transform .45s ease;}
+  .proj-card:hover .proj-thumb img{transform:scale(1.05);}
   .proj-body{padding:18px;}
   .proj-body .name{font-weight:700; font-size:15px; margin-bottom:4px;}
   .proj-body .platform{font-family:var(--mono); font-size:11px; color:var(--accent); font-weight:700; text-transform:uppercase; letter-spacing:.05em; margin-bottom:10px; display:block;}
   .proj-body a.visit{font-family:var(--mono); font-size:12.5px; color:var(--accent-2); font-weight:600; display:inline-flex; align-items:center; gap:5px;}
   .proj-body a.visit:hover{text-decoration:underline;}
-  .split{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
-  @media (max-width:700px){ .split{grid-template-columns:1fr;} }
-  .edu-item{border:1px solid var(--line); background:var(--surface); border-radius:10px; padding:20px 22px; margin-bottom:14px;}
-  .edu-item .deg{font-weight:700; font-size:15.5px; margin-bottom:3px;}
+  .edu-block{margin-bottom:40px;}
+  .col-head{font-family:var(--mono); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.09em;
+    color:var(--accent); display:flex; align-items:center; gap:9px; margin-bottom:18px;}
+  .col-head::after{content:""; flex:1; height:1px; background:var(--line);}
+  .col-head .n{color:var(--muted); font-weight:600; letter-spacing:0;}
+  .edu-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px;}
+  .edu-item{border:1px solid var(--line); background:var(--surface); border-radius:10px; padding:20px 22px; border-left:3px solid var(--accent-2);}
+  .edu-item .deg{font-weight:700; font-size:15.5px; margin-bottom:4px; line-height:1.3;}
   .edu-item .school{color:var(--accent-2); font-size:13.5px; font-family:var(--mono);}
-  .edu-item .yr{color:var(--muted); font-size:12.5px; font-family:var(--mono); margin-top:4px;}
-  .course-list li{display:flex; align-items:center; gap:10px; padding:12px 0; border-bottom:1px dashed var(--line); font-size:14.5px;}
-  .course-list li:last-child{border-bottom:none;}
-  .course-list .chk{color:var(--green); font-family:var(--mono); font-weight:700;}
+  .edu-item .yr{color:var(--muted); font-size:12px; font-family:var(--mono); margin-top:6px;}
+  .cert-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px;}
+  .cert-card{display:flex; align-items:flex-start; gap:13px; border:1px solid var(--line); background:var(--surface);
+    border-radius:10px; padding:15px 16px; transition:border-color .15s ease, transform .15s ease;}
+  .cert-card:hover{border-color:var(--accent); transform:translateY(-2px);}
+  .cert-card .seal{flex:0 0 auto; width:36px; height:36px; border-radius:9px; display:flex; align-items:center; justify-content:center;
+    background:rgba(255,122,41,.1); color:var(--accent);}
+  .cert-card .ct{font-weight:700; font-size:14px; line-height:1.35;}
+  .cert-card .cn{color:var(--muted); font-size:12px; font-family:var(--mono); margin-top:3px;}
+  .cert-card .cn.view{color:var(--accent-2); font-weight:600;}
+  .cert-card.has-img{flex-direction:column; align-items:stretch; gap:0; padding:0; overflow:hidden;}
+  .cert-card.has-img .cert-thumb{display:block; height:150px; background:var(--paper); border-bottom:1px solid var(--line);}
+  .cert-card.has-img .cert-thumb img{width:100%; height:100%; object-fit:cover; object-position:top center;}
+  .cert-card.has-img .cert-body{padding:14px 16px;}
   .tst-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
   @media (max-width:700px){ .tst-grid{grid-template-columns:1fr;} }
   .tst-card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:24px 26px;}
@@ -222,7 +242,7 @@
       <div class="browser">
         <div class="chrome">
           <div class="dots"><span></span><span></span><span></span></div>
-          <div class="url-bar"><span class="lock">🔒</span> vre.us/wp-content/uploads/2026/developer/public/</div>
+          <div class="url-bar"><span class="lock">🔒</span> https://asifaslamibu.github.io/</div>
         </div>
         <div class="tabs-row">
                       <div class="tab active">WordPress</div>
@@ -234,6 +254,7 @@
                   </div>
 
         <div class="hero-body">
+                      <img class="hero-photo" src="uploads/profile_fbae9c4f4f9b.png" alt="muhammad.asif">
                     <div class="hero-kicker">// AVAILABLE FOR FULL-TIME &amp; CONTRACT WORK — KARACHI, PK</div>
           <h1>I turn designs into live <span class="accent">production</span> sites.<br><span id="typed"></span></h1>
           <p class="desc">Full stack &amp; CMS developer with 5+ years shipping responsive eCommerce and marketing sites across WordPress, Shopify, Wix, Webflow, Squarespace and HubSpot — currently leading a development team from design handoff to deployment.</p>
@@ -383,6 +404,25 @@
                                   <span class="tag">MS Office</span>
                               </div>
             </div>
+                      <div class="skill-row">
+              <span class="k">Networking &amp; Security</span>
+              <div class="tag-list">
+                                  <span class="tag">IPv4 Addressing</span>
+                                  <span class="tag">Wireless Access</span>
+                                  <span class="tag">Protocols &amp; Standards</span>
+                                  <span class="tag">TCP/IP</span>
+                              </div>
+            </div>
+                      <div class="skill-row">
+              <span class="k">Payments &amp; APIs</span>
+              <div class="tag-list">
+                                  <span class="tag">Firebase</span>
+                                  <span class="tag">Stripe</span>
+                                  <span class="tag">PayPal</span>
+                                  <span class="tag">REST APIs</span>
+                                  <span class="tag">Node.js</span>
+                              </div>
+            </div>
                   </div>
       </div>
     </div>
@@ -500,6 +540,36 @@
                               <div class="diff-line"><span class="plus">+</span> Mobile development: Android Studio</div>
                           </div>
           </div>
+                  <div class="commit">
+            <div class="commit-head">
+              <span class="hash">#c31d0a</span>
+              <span class="commit-msg">Data Entry Operator</span>
+            </div>
+            <div class="commit-meta">
+              <span class="company">M. I. Industries</span>
+              <span>Karachi, Sindh</span>
+              <span>05/2018 → 09/2019</span>
+            </div>
+            <div class="diff">
+                              <div class="diff-line"><span class="plus">+</span> Data entry, record management and document processing</div>
+                              <div class="diff-line"><span class="plus">+</span> Maintained accuracy across high-volume datasets</div>
+                          </div>
+          </div>
+                  <div class="commit">
+            <div class="commit-head">
+              <span class="hash">#7a2f61</span>
+              <span class="commit-msg">IoT Intern</span>
+            </div>
+            <div class="commit-meta">
+              <span class="company">Spectrum Engineering Solutions</span>
+              <span>Karachi, Sindh</span>
+              <span>01/2018 → 04/2018</span>
+            </div>
+            <div class="diff">
+                              <div class="diff-line"><span class="plus">+</span> IoT prototyping and hardware–software integration</div>
+                              <div class="diff-line"><span class="plus">+</span> Assisted with sensor data collection and testing</div>
+                          </div>
+          </div>
               </div>
     </div>
   </section>
@@ -515,14 +585,122 @@
         <button class="filter-btn active" data-filter="all">All</button>
                   <button class="filter-btn" data-filter="wordpress">WordPress</button>
                   <button class="filter-btn" data-filter="shopify">Shopify</button>
-                  <button class="filter-btn" data-filter="wix">Wix</button>
+                  <button class="filter-btn" data-filter="Core PHP">Core PHP</button>
+                  <button class="filter-btn" data-filter="hubspot">HubSpot</button>
                   <button class="filter-btn" data-filter="webflow">Webflow</button>
-                  <button class="filter-btn" data-filter="other">Other</button>
+                  <button class="filter-btn" data-filter="wix">Wix</button>
               </div>
 
       <div class="proj-grid" id="projGrid">
-                  <div class="proj-card" data-cat="wordpress">
+                            <div class="proj-card" data-cat="wordpress">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">zuperiastore.com</div></div>
+            <a class="proj-thumb" href="https://zuperiastore.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fzuperiastore.com%2F?w=640&amp;h=420" loading="lazy" alt="Zuperia Store preview" onerror="this.style.display='none'">
+            </a>
+            <div class="proj-body">
+              <span class="platform">Wordpress</span>
+              <div class="name">Zuperia Store</div>
+              <div class="desc">Towel ecommerce website</div>                              <div class="proj-tech">
+                  <span>Wordpress</span><span>Elementor</span><span>PHP</span>                </div>
+                            <a class="visit" href="https://zuperiastore.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                            <div class="proj-card" data-cat="wordpress">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">astrozon.us</div></div>
+            <a class="proj-thumb" href="https://astrozon.us/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fastrozon.us%2F?w=640&amp;h=420" loading="lazy" alt="Astrozon US preview" onerror="this.style.display='none'">
+            </a>
+            <div class="proj-body">
+              <span class="platform">Wordpress, PHP</span>
+              <div class="name">Astrozon US</div>
+              <div class="desc">Book Sale Ecommerce Website</div>                              <div class="proj-tech">
+                  <span>HTML CSS JS PHP PHP Wordpress</span>                </div>
+                            <a class="visit" href="https://astrozon.us/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                            <div class="proj-card" data-cat="wordpress">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">thestoreonline.com.au</div></div>
+            <a class="proj-thumb" href="https://thestoreonline.com.au/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fthestoreonline.com.au%2F?w=640&amp;h=420" loading="lazy" alt="The Store Online preview" onerror="this.style.display='none'">
+            </a>
+            <div class="proj-body">
+              <span class="platform">Wordpress</span>
+              <div class="name">The Store Online</div>
+              <div class="desc">Ecommerce website</div>                              <div class="proj-tech">
+                  <span>Wordpress</span><span>Elementor</span><span>PHP</span>                </div>
+                            <a class="visit" href="https://thestoreonline.com.au/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                            <div class="proj-card" data-cat="shopify">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">theflowergallery.co.uk</div></div>
+            <a class="proj-thumb" href="https://theflowergallery.co.uk/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftheflowergallery.co.uk%2F?w=640&amp;h=420" loading="lazy" alt="the flower Gallery preview" onerror="this.style.display='none'">
+            </a>
+            <div class="proj-body">
+              <span class="platform">Shopify</span>
+              <div class="name">the flower Gallery</div>
+                                            <div class="proj-tech">
+                  <span>Shopify</span>                </div>
+                            <a class="visit" href="https://theflowergallery.co.uk/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                            <div class="proj-card" data-cat="Core PHP">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">peshawarbarracks.com</div></div>
+            <a class="proj-thumb" href="https://peshawarbarracks.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fpeshawarbarracks.com%2F?w=640&amp;h=420" loading="lazy" alt="Peshawar Barracks preview" onerror="this.style.display='none'">
+            </a>
+            <div class="proj-body">
+              <span class="platform">PHP</span>
+              <div class="name">Peshawar Barracks</div>
+                                            <div class="proj-tech">
+                  <span>PHP</span><span>HTML</span><span>CSS</span><span>JQuery</span>                </div>
+                            <a class="visit" href="https://peshawarbarracks.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                            <div class="proj-card" data-cat="hubspot">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">tovutilms.com</div></div>
+            <a class="proj-thumb" href="https://www.tovutilms.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.tovutilms.com%2F?w=640&amp;h=420" loading="lazy" alt="Tovutilms preview" onerror="this.style.display='none'">
+            </a>
+            <div class="proj-body">
+              <span class="platform">Hubspot</span>
+              <div class="name">Tovutilms</div>
+                                            <div class="proj-tech">
+                  <span>Hubspot</span>                </div>
+                            <a class="visit" href="https://www.tovutilms.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                            <div class="proj-card" data-cat="webflow">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">actualgrupo.com</div></div>
+            <a class="proj-thumb" href="https://www.actualgrupo.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.actualgrupo.com%2F?w=640&amp;h=420" loading="lazy" alt="ActualGrupo preview" onerror="this.style.display='none'">
+            </a>
+            <div class="proj-body">
+              <span class="platform">Weblfow</span>
+              <div class="name">ActualGrupo</div>
+                                            <div class="proj-tech">
+                  <span>Weblfow</span><span>Js</span>                </div>
+                            <a class="visit" href="https://www.actualgrupo.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                            <div class="proj-card" data-cat="wordpress">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">bestingle.com/</div></div>
+            <a class="proj-thumb" href="https://bestingle.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fbestingle.com%2F?w=640&amp;h=420" loading="lazy" alt="Bestingle preview" onerror="this.style.display='none'">
+            </a>
+            <div class="proj-body">
+              <span class="platform">Wordpress</span>
+              <div class="name">Bestingle</div>
+              <div class="desc">Music Site</div>                              <div class="proj-tech">
+                  <span>Custom</span><span>Wordpress</span><span>Elementor</span><span>PHP</span>                </div>
+                            <a class="visit" href="https://bestingle.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">bellarinj.com</div></div>
+            <a class="proj-thumb" href="https://www.bellarinj.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.bellarinj.com%2F?w=640&amp;h=420" loading="lazy" alt="Bellarinj preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">WordPress</span>
               <div class="name">Bellarinj</div>
@@ -531,8 +709,11 @@
                             <a class="visit" href="https://www.bellarinj.com/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="wordpress">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">johnskillerprotein.com</div></div>
+            <a class="proj-thumb" href="https://johnskillerprotein.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fjohnskillerprotein.com%2F?w=640&amp;h=420" loading="lazy" alt="John&#039;s Killer Protein preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">WordPress</span>
               <div class="name">John&#039;s Killer Protein</div>
@@ -541,8 +722,11 @@
                             <a class="visit" href="https://johnskillerprotein.com/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="wordpress">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">mayashinebooks.com</div></div>
+            <a class="proj-thumb" href="https://mayashinebooks.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fmayashinebooks.com%2F?w=640&amp;h=420" loading="lazy" alt="Maya Shine Books preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">WordPress</span>
               <div class="name">Maya Shine Books</div>
@@ -551,16 +735,11 @@
                             <a class="visit" href="https://mayashinebooks.com/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="wordpress">
-            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">entarjaknits.com</div></div>
-            <div class="proj-body">
-              <span class="platform">WordPress</span>
-              <div class="name">Entarja Knits</div>
-                                          <a class="visit" href="https://entarjaknits.com/" target="_blank" rel="noopener">Visit site →</a>
-            </div>
-          </div>
-                  <div class="proj-card" data-cat="shopify">
+                            <div class="proj-card" data-cat="shopify">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">lullababyusa.com</div></div>
+            <a class="proj-thumb" href="https://lullababyusa.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Flullababyusa.com%2F?w=640&amp;h=420" loading="lazy" alt="Lulla Baby USA preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Shopify · PageFly</span>
               <div class="name">Lulla Baby USA</div>
@@ -569,8 +748,11 @@
                             <a class="visit" href="https://lullababyusa.com/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="wordpress">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">360socialmedia.ca</div></div>
+            <a class="proj-thumb" href="https://360socialmedia.ca/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2F360socialmedia.ca%2F?w=640&amp;h=420" loading="lazy" alt="360 Social Media preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">WordPress</span>
               <div class="name">360 Social Media</div>
@@ -579,102 +761,57 @@
                             <a class="visit" href="https://360socialmedia.ca/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="shopify">
+                            <div class="proj-card" data-cat="shopify">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">johnsonsprintwear.co.uk</div></div>
+            <a class="proj-thumb" href="http://johnsonsprintwear.co.uk/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/http%3A%2F%2Fjohnsonsprintwear.co.uk%2F?w=640&amp;h=420" loading="lazy" alt="Johnsons Printwear preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Shopify</span>
               <div class="name">Johnsons Printwear</div>
                                           <a class="visit" href="http://johnsonsprintwear.co.uk/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="shopify">
+                            <div class="proj-card" data-cat="shopify">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">sapserveracess.com</div></div>
+            <a class="proj-thumb" href="https://sapserveracess.com" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fsapserveracess.com?w=640&amp;h=420" loading="lazy" alt="SAP Server Access preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Shopify</span>
               <div class="name">SAP Server Access</div>
                                           <a class="visit" href="https://sapserveracess.com" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="wix">
-            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">washingtonsdetailing.com</div></div>
+                            <div class="proj-card" data-cat="wix">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">washingtondetailingllc.com</div></div>
+            <a class="proj-thumb" href="https://www.washingtondetailingllc.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.washingtondetailingllc.com%2F?w=640&amp;h=420" loading="lazy" alt="Washingtons Detailing preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Wix</span>
               <div class="name">Washingtons Detailing</div>
               <div class="desc">A professional car detailing service website built on WIX with custom Velo code for booking system and gallery features.</div>                              <div class="proj-tech">
                   <span>WIX</span><span>Velo (JavaScript)</span><span>WIX Database</span><span>CSS</span>                </div>
-                            <a class="visit" href="https://www.washingtonsdetailing.com/" target="_blank" rel="noopener">Visit site →</a>
+                            <a class="visit" href="https://www.washingtondetailingllc.com/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="wix">
+                            <div class="proj-card" data-cat="wix">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">ecopremiumcleaning.co.uk</div></div>
+            <a class="proj-thumb" href="https://www.ecopremiumcleaning.co.uk/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.ecopremiumcleaning.co.uk%2F?w=640&amp;h=420" loading="lazy" alt="Eco Premium Cleaning preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Wix</span>
               <div class="name">Eco Premium Cleaning</div>
                                           <a class="visit" href="https://www.ecopremiumcleaning.co.uk/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="wix">
-            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">hilariousbedtimestories.com</div></div>
-            <div class="proj-body">
-              <span class="platform">Wix</span>
-              <div class="name">Hilarious Bedtime Stories</div>
-              <div class="desc">A playful children's bedtime storytelling website built on Wix, showcasing a collection of fun, illustrated stories with an easy-to-browse reading experience.</div>                              <div class="proj-tech">
-                  <span>Wix</span><span>Wix Editor</span><span>CSS</span>                </div>
-                            <a class="visit" href="https://www.hilariousbedtimestories.com/" target="_blank" rel="noopener">Visit site →</a>
-            </div>
-          </div>
-                  <div class="proj-card" data-cat="wix">
-            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">thewellnessbrothers.com</div></div>
-            <div class="proj-body">
-              <span class="platform">Wix</span>
-              <div class="name">The Wellness Brothers</div>
-              <div class="desc">A health and wellness brand website built on Wix, featuring services, blog content and lead-capture contact forms.</div>                              <div class="proj-tech">
-                  <span>Wix</span><span>Wix Editor</span><span>CSS</span>                </div>
-                            <a class="visit" href="https://www.thewellnessbrothers.com/" target="_blank" rel="noopener">Visit site →</a>
-            </div>
-          </div>
-                  <div class="proj-card" data-cat="wix">
-            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">summerhealing.org</div></div>
-            <div class="proj-body">
-              <span class="platform">Wix</span>
-              <div class="name">Summer Healing</div>
-              <div class="desc">A wellness and healing organization website built on Wix, with service pages, appointment scheduling and contact integration.</div>                              <div class="proj-tech">
-                  <span>Wix</span><span>Wix Bookings</span><span>CSS</span>                </div>
-                            <a class="visit" href="https://www.summerhealing.org/" target="_blank" rel="noopener">Visit site →</a>
-            </div>
-          </div>
-                  <div class="proj-card" data-cat="wix">
-            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">healthyuofm.com</div></div>
-            <div class="proj-body">
-              <span class="platform">Wix</span>
-              <div class="name">Healthy U of M</div>
-              <div class="desc">A health and wellness resource website built on Wix, presenting programs and informational content in a clean, accessible layout.</div>                              <div class="proj-tech">
-                  <span>Wix</span><span>Wix Editor</span><span>CSS</span>                </div>
-                            <a class="visit" href="https://www.healthyuofm.com/" target="_blank" rel="noopener">Visit site →</a>
-            </div>
-          </div>
-                  <div class="proj-card" data-cat="wix">
-            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">bikiarislab.wixsite.com</div></div>
-            <div class="proj-body">
-              <span class="platform">Wix</span>
-              <div class="name">Bikiaris Lab</div>
-              <div class="desc">An academic research lab website built on Wix, presenting the team, publications and ongoing research projects.</div>                              <div class="proj-tech">
-                  <span>Wix</span><span>Wix Editor</span><span>CSS</span>                </div>
-                            <a class="visit" href="https://bikiarislab.wixsite.com/bikiarislab" target="_blank" rel="noopener">Visit site →</a>
-            </div>
-          </div>
-                  <div class="proj-card" data-cat="wix">
-            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">washingtondetailingllc.com</div></div>
-            <div class="proj-body">
-              <span class="platform">Wix</span>
-              <div class="name">Washington Detailing LLC</div>
-              <div class="desc">A professional auto detailing service website built on Wix, featuring service listings, a gallery and online booking/contact forms.</div>                              <div class="proj-tech">
-                  <span>Wix</span><span>Velo (JavaScript)</span><span>CSS</span>                </div>
-                            <a class="visit" href="https://www.washingtondetailingllc.com/" target="_blank" rel="noopener">Visit site →</a>
-            </div>
-          </div>
-                  <div class="proj-card" data-cat="webflow">
+                            <div class="proj-card" data-cat="webflow">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">virtualmike.ai</div></div>
+            <a class="proj-thumb" href="https://virtualmike.ai/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fvirtualmike.ai%2F?w=640&amp;h=420" loading="lazy" alt="Virtual Mike AI preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Webflow</span>
               <div class="name">Virtual Mike AI</div>
@@ -683,140 +820,269 @@
                             <a class="visit" href="https://virtualmike.ai/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">toccoabiz.com</div></div>
+            <a class="proj-thumb" href="http://toccoabiz.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/http%3A%2F%2Ftoccoabiz.com%2F?w=640&amp;h=420" loading="lazy" alt="Tocco A Biz preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Client Site</span>
               <div class="name">Tocco A Biz</div>
                                           <a class="visit" href="http://toccoabiz.com/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">thestoreonline.com.au</div></div>
+            <a class="proj-thumb" href="https://thestoreonline.com.au/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fthestoreonline.com.au%2F?w=640&amp;h=420" loading="lazy" alt="The Store Online preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Client Site</span>
               <div class="name">The Store Online</div>
                                           <a class="visit" href="https://thestoreonline.com.au/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">elegantewesternwear.com</div></div>
+            <a class="proj-thumb" href="https://elegantewesternwear.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Felegantewesternwear.com%2F?w=640&amp;h=420" loading="lazy" alt="Elegante Western Wear preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Client Site</span>
               <div class="name">Elegante Western Wear</div>
                                           <a class="visit" href="https://elegantewesternwear.com/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">shimatradinglimited.com</div></div>
+            <a class="proj-thumb" href="https://www.shimatradinglimited.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.shimatradinglimited.com%2F?w=640&amp;h=420" loading="lazy" alt="Shima Trading Limited preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Client Site</span>
               <div class="name">Shima Trading Limited</div>
                                           <a class="visit" href="https://www.shimatradinglimited.com/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">usfts.us</div></div>
+            <a class="proj-thumb" href="https://usfts.us/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fusfts.us%2F?w=640&amp;h=420" loading="lazy" alt="US Forces Tactical Supply preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Client Site</span>
               <div class="name">US Forces Tactical Supply</div>
                                           <a class="visit" href="https://usfts.us/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">pasupply.it</div></div>
+            <a class="proj-thumb" href="https://pasupply.it" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fpasupply.it?w=640&amp;h=420" loading="lazy" alt="Pa Supply preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Client Site</span>
               <div class="name">Pa Supply</div>
                                           <a class="visit" href="https://pasupply.it" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">altrotech.pt</div></div>
+            <a class="proj-thumb" href="https://altrotech.pt" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Faltrotech.pt?w=640&amp;h=420" loading="lazy" alt="Altrotech preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Client Site</span>
               <div class="name">Altrotech</div>
                                           <a class="visit" href="https://altrotech.pt" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">tacbolt.com</div></div>
+            <a class="proj-thumb" href="https://tacbolt.com" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftacbolt.com?w=640&amp;h=420" loading="lazy" alt="Tacbolt preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
-              <span class="platform">Client Site</span>
+              <span class="platform">Wordpress</span>
               <div class="name">Tacbolt</div>
                                           <a class="visit" href="https://tacbolt.com" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">usforcestactical.com</div></div>
+            <a class="proj-thumb" href="https://usforcestactical.com" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fusforcestactical.com?w=640&amp;h=420" loading="lazy" alt="US Forces Tactical preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
-              <span class="platform">Client Site</span>
+              <span class="platform">Wordpress</span>
               <div class="name">US Forces Tactical</div>
                                           <a class="visit" href="https://usforcestactical.com" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">vre.us</div></div>
+            <a class="proj-thumb" href="https://vre.us" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fvre.us?w=640&amp;h=420" loading="lazy" alt="VRE preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
-              <span class="platform">Client Site</span>
+              <span class="platform">Wordpress</span>
               <div class="name">VRE</div>
                                           <a class="visit" href="https://vre.us" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">ecommetierventures.com</div></div>
+            <a class="proj-thumb" href="https://ecommetierventures.com" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fecommetierventures.com?w=640&amp;h=420" loading="lazy" alt="Ecommet Ventures preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
-              <span class="platform">Client Site</span>
+              <span class="platform">Wordpress</span>
               <div class="name">Ecommet Ventures</div>
                                           <a class="visit" href="https://ecommetierventures.com" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">aveelectric.elegantewesternwear.com</div></div>
+            <a class="proj-thumb" href="https://aveelectric.elegantewesternwear.com" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Faveelectric.elegantewesternwear.com?w=640&amp;h=420" loading="lazy" alt="Ave Electric preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Sub-store</span>
               <div class="name">Ave Electric</div>
                                           <a class="visit" href="https://aveelectric.elegantewesternwear.com" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">junkmione.elegantewesternwear.com</div></div>
+            <a class="proj-thumb" href="https://junkmione.elegantewesternwear.com" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fjunkmione.elegantewesternwear.com?w=640&amp;h=420" loading="lazy" alt="Junk Mione preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Sub-store</span>
               <div class="name">Junk Mione</div>
                                           <a class="visit" href="https://junkmione.elegantewesternwear.com" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">ashchimneytwo.elegantewesternwear.com</div></div>
+            <a class="proj-thumb" href="https://ashchimneytwo.elegantewesternwear.com" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fashchimneytwo.elegantewesternwear.com?w=640&amp;h=420" loading="lazy" alt="Ash Chimney Two preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Sub-store</span>
               <div class="name">Ash Chimney Two</div>
                                           <a class="visit" href="https://ashchimneytwo.elegantewesternwear.com" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">junkremovals.elegantewesternwear.com</div></div>
+            <a class="proj-thumb" href="https://junkremovals.elegantewesternwear.com" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fjunkremovals.elegantewesternwear.com?w=640&amp;h=420" loading="lazy" alt="Junk Removals preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Sub-store</span>
               <div class="name">Junk Removals</div>
                                           <a class="visit" href="https://junkremovals.elegantewesternwear.com" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">promcoast.elegantewesternwear.com</div></div>
+            <a class="proj-thumb" href="https://promcoast.elegantewesternwear.com" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fpromcoast.elegantewesternwear.com?w=640&amp;h=420" loading="lazy" alt="Promcoast preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Sub-store</span>
               <div class="name">Promcoast</div>
                                           <a class="visit" href="https://promcoast.elegantewesternwear.com" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
-                  <div class="proj-card" data-cat="other">
+                            <div class="proj-card" data-cat="wordpress">
             <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">junkteens.elegantwesternwear.com</div></div>
+            <a class="proj-thumb" href="https://junkteens.elegantwesternwear.com" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fjunkteens.elegantwesternwear.com?w=640&amp;h=420" loading="lazy" alt="Junk Teens preview" onerror="this.style.display='none'">
+            </a>
             <div class="proj-body">
               <span class="platform">Sub-store</span>
               <div class="name">Junk Teens</div>
                                           <a class="visit" href="https://junkteens.elegantwesternwear.com" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                            <div class="proj-card" data-cat="wix">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">hilariousbedtimestories.com</div></div>
+            <a class="proj-thumb" href="https://www.hilariousbedtimestories.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.hilariousbedtimestories.com%2F?w=640&amp;h=420" loading="lazy" alt="Hilarious Bedtime Stories preview" onerror="this.style.display='none'">
+            </a>
+            <div class="proj-body">
+              <span class="platform">Wix</span>
+              <div class="name">Hilarious Bedtime Stories</div>
+              <div class="desc">A playful childrens bedtime storytelling website built on Wix, showcasing a collection of fun, illustrated stories with an easy-to-browse reading experience.</div>                              <div class="proj-tech">
+                  <span>Wix</span><span>Wix Editor</span><span>CSS</span>                </div>
+                            <a class="visit" href="https://www.hilariousbedtimestories.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                            <div class="proj-card" data-cat="wix">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">thewellnessbrothers.com</div></div>
+            <a class="proj-thumb" href="https://www.thewellnessbrothers.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.thewellnessbrothers.com%2F?w=640&amp;h=420" loading="lazy" alt="The Wellness Brothers preview" onerror="this.style.display='none'">
+            </a>
+            <div class="proj-body">
+              <span class="platform">Wix</span>
+              <div class="name">The Wellness Brothers</div>
+              <div class="desc">A health and wellness brand website built on Wix, featuring services, blog content and lead-capture contact forms.</div>                              <div class="proj-tech">
+                  <span>Wix</span><span>Wix Editor</span><span>CSS</span>                </div>
+                            <a class="visit" href="https://www.thewellnessbrothers.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                            <div class="proj-card" data-cat="wix">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">summerhealing.org</div></div>
+            <a class="proj-thumb" href="https://www.summerhealing.org/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.summerhealing.org%2F?w=640&amp;h=420" loading="lazy" alt="Summer Healing preview" onerror="this.style.display='none'">
+            </a>
+            <div class="proj-body">
+              <span class="platform">Wix</span>
+              <div class="name">Summer Healing</div>
+              <div class="desc">A wellness and healing organization website built on Wix, with service pages, appointment scheduling and contact integration.</div>                              <div class="proj-tech">
+                  <span>Wix</span><span>Wix Bookings</span><span>CSS</span>                </div>
+                            <a class="visit" href="https://www.summerhealing.org/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                            <div class="proj-card" data-cat="wix">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">healthyuofm.com</div></div>
+            <a class="proj-thumb" href="https://www.healthyuofm.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.healthyuofm.com%2F?w=640&amp;h=420" loading="lazy" alt="Healthy U of M preview" onerror="this.style.display='none'">
+            </a>
+            <div class="proj-body">
+              <span class="platform">Wix</span>
+              <div class="name">Healthy U of M</div>
+              <div class="desc">A health and wellness resource website built on Wix, presenting programs and informational content in a clean, accessible layout.</div>                              <div class="proj-tech">
+                  <span>Wix</span><span>Wix Editor</span><span>CSS</span>                </div>
+                            <a class="visit" href="https://www.healthyuofm.com/" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                            <div class="proj-card" data-cat="wix">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">bikiarislab.wixsite.com</div></div>
+            <a class="proj-thumb" href="https://bikiarislab.wixsite.com/bikiarislab" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fbikiarislab.wixsite.com%2Fbikiarislab?w=640&amp;h=420" loading="lazy" alt="Bikiaris Lab preview" onerror="this.style.display='none'">
+            </a>
+            <div class="proj-body">
+              <span class="platform">Wix</span>
+              <div class="name">Bikiaris Lab</div>
+              <div class="desc">An academic research lab website built on Wix, presenting the team, publications and ongoing research projects.</div>                              <div class="proj-tech">
+                  <span>Wix</span><span>Wix Editor</span><span>CSS</span>                </div>
+                            <a class="visit" href="https://bikiarislab.wixsite.com/bikiarislab" target="_blank" rel="noopener">Visit site →</a>
+            </div>
+          </div>
+                            <div class="proj-card" data-cat="wix">
+            <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">washingtondetailingllc.com</div></div>
+            <a class="proj-thumb" href="https://www.washingtondetailingllc.com/" target="_blank" rel="noopener">
+              <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.washingtondetailingllc.com%2F?w=640&amp;h=420" loading="lazy" alt="Washington Detailing LLC preview" onerror="this.style.display='none'">
+            </a>
+            <div class="proj-body">
+              <span class="platform">Wix</span>
+              <div class="name">Washington Detailing LLC</div>
+              <div class="desc">A professional auto detailing service website built on Wix, featuring service listings, a gallery and online booking/contact forms.</div>                              <div class="proj-tech">
+                  <span>Wix</span><span>Velo (JavaScript)</span><span>CSS</span>                </div>
+                            <a class="visit" href="https://www.washingtondetailingllc.com/" target="_blank" rel="noopener">Visit site →</a>
             </div>
           </div>
               </div>
@@ -832,7 +1098,68 @@
       <h2 class="title">Vibe Coding Projects</h2>
       <p class="lede">Projects built fast with AI assistance — ideas shipped in hours, not weeks. Real products, real outcomes, powered by modern AI tooling.</p>
 
-              <div class="vibe-empty"><span class="zap">⚡</span>Projects coming soon — check back soon.</div>
+              <div class="proj-grid">
+                      <div class="proj-card" data-cat="vibe">
+              <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">⚡ vibe</div></div>
+                              <a class="proj-thumb" href="https://texpertdeals.us/" target="_blank" rel="noopener">
+                  <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Ftexpertdeals.us%2F?w=640&amp;h=420" loading="lazy" alt="TexpertDeals preview" onerror="this.style.display='none'">
+                </a>
+                            <div class="proj-body">
+                <div class="name">TexpertDeals</div>
+                <div class="desc">Ecommerce Web App</div>                                  <div class="proj-tech"><span>HTML CSS JS PHP LARAVEL</span></div>
+                                <a class="visit" href="https://texpertdeals.us/" target="_blank" rel="noopener">Visit →</a>              </div>
+            </div>
+                      <div class="proj-card" data-cat="vibe">
+              <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">⚡ vibe</div></div>
+                              <a class="proj-thumb" href="https://shynexcleaningservices.co.uk/" target="_blank" rel="noopener">
+                  <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fshynexcleaningservices.co.uk%2F?w=640&amp;h=420" loading="lazy" alt="Shynex Cleaning Services preview" onerror="this.style.display='none'">
+                </a>
+                            <div class="proj-body">
+                <div class="name">Shynex Cleaning Services</div>
+                <div class="desc">Ai Cleaning room website</div>                                  <div class="proj-tech"><span>Copilot</span><span>nodejs</span><span>Reactjs</span><span>Mongodb</span></div>
+                                <a class="visit" href="https://shynexcleaningservices.co.uk/" target="_blank" rel="noopener">Visit →</a>              </div>
+            </div>
+                      <div class="proj-card" data-cat="vibe">
+              <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">⚡ vibe</div></div>
+                              <a class="proj-thumb" href="https://www.scivo.ai/" target="_blank" rel="noopener">
+                  <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.scivo.ai%2F?w=640&amp;h=420" loading="lazy" alt="Scivo preview" onerror="this.style.display='none'">
+                </a>
+                            <div class="proj-body">
+                <div class="name">Scivo</div>
+                                                  <div class="proj-tech"><span>Copilot</span><span>nodejs</span><span>Reactjs</span><span>Mongodb</span></div>
+                                <a class="visit" href="https://www.scivo.ai/" target="_blank" rel="noopener">Visit →</a>              </div>
+            </div>
+                      <div class="proj-card" data-cat="vibe">
+              <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">⚡ vibe</div></div>
+                              <a class="proj-thumb" href="houstonlimousineinc.com" target="_blank" rel="noopener">
+                  <img src="https://s.wordpress.com/mshots/v1/houstonlimousineinc.com?w=640&amp;h=420" loading="lazy" alt="Houstonlimousineinc preview" onerror="this.style.display='none'">
+                </a>
+                            <div class="proj-body">
+                <div class="name">Houstonlimousineinc</div>
+                                                  <div class="proj-tech"><span>Copilot</span><span>nodejs</span><span>NEXTjs</span><span>Mongodb</span></div>
+                                <a class="visit" href="houstonlimousineinc.com" target="_blank" rel="noopener">Visit →</a>              </div>
+            </div>
+                      <div class="proj-card" data-cat="vibe">
+              <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">⚡ vibe</div></div>
+                              <a class="proj-thumb" href="https://ibextravels.co.za/" target="_blank" rel="noopener">
+                  <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fibextravels.co.za%2F?w=640&amp;h=420" loading="lazy" alt="ibextravels.co preview" onerror="this.style.display='none'">
+                </a>
+                            <div class="proj-body">
+                <div class="name">ibextravels.co</div>
+                <div class="desc">Travel website</div>                                  <div class="proj-tech"><span>Copilot</span><span>Laravel</span><span>HTML</span><span>CSS</span><span>JS</span><span>MYSQL</span></div>
+                                <a class="visit" href="https://ibextravels.co.za/" target="_blank" rel="noopener">Visit →</a>              </div>
+            </div>
+                      <div class="proj-card" data-cat="vibe">
+              <div class="proj-chrome"><div class="dots"><span></span><span></span><span></span></div><div class="u">⚡ vibe</div></div>
+                              <a class="proj-thumb" href="https://www.axenproperties.co.za/" target="_blank" rel="noopener">
+                  <img src="https://s.wordpress.com/mshots/v1/https%3A%2F%2Fwww.axenproperties.co.za%2F?w=640&amp;h=420" loading="lazy" alt="Axenproperties preview" onerror="this.style.display='none'">
+                </a>
+                            <div class="proj-body">
+                <div class="name">Axenproperties</div>
+                                                  <div class="proj-tech"><span>Copilot</span><span>nodejs</span><span>Reactjs</span><span>Mongodb</span></div>
+                                <a class="visit" href="https://www.axenproperties.co.za/" target="_blank" rel="noopener">Visit →</a>              </div>
+            </div>
+                  </div>
           </div>
   </section>
 
@@ -843,29 +1170,118 @@
       <h2 class="title">Foundations</h2>
       <p class="lede">Formal study and short courses along the way.</p>
 
-      <div class="split">
-        <div>
+            <div class="edu-block">
+        <div class="col-head">🎓 Education</div>
+        <div class="edu-grid">
                       <div class="edu-item">
-              <div class="deg">Associate Degree of Science — Engineering</div>
+              <div class="deg">BCS — Computer Software Engineering</div>
               <div class="school">Shah Abdul Latif University, Khairpur, Sindh</div>
-              <div class="yr">2020 – 2023</div>
-            </div>
+              <div class="yr">Jan 2019 – Feb 2023</div>            </div>
                       <div class="edu-item">
               <div class="deg">Diploma in IT</div>
               <div class="school">Aligarh Institute of Technology, Karachi</div>
-              <div class="yr">08/2018 · Microprocessor &amp; Architecture, Computer Programming, Web Development</div>
+              <div class="yr">Aug 2015 – Aug 2018 · Microprocessor &amp; Architecture, Computer Programming, Web Development</div>            </div>
+                      <div class="edu-item">
+              <div class="deg">Web &amp; Mobile Application Development</div>
+              <div class="school">Aptech Pakistan</div>
+                          </div>
+                  </div>
+      </div>
+      
+            <div class="cert-block">
+        <div class="col-head">Certifications <span class="n">· 8</span></div>
+        <div class="cert-grid">
+                      <div class="cert-card">
+                              <span class="seal">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
+                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                            <div class="cert-body">
+                <div class="ct">Cyber Security &amp; Ethical Hacking — NED University</div>
+                <div class="cn">(in progress)</div>                              </div>
+            </div>
+                      <div class="cert-card">
+                              <span class="seal">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
+                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                            <div class="cert-body">
+                <div class="ct">Mobile Application &amp; Web Development — Aptech Learning Center</div>
+                                              </div>
+            </div>
+                      <div class="cert-card">
+                              <span class="seal">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
+                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                            <div class="cert-body">
+                <div class="ct">Office Automation — Indus Public College</div>
+                                              </div>
+            </div>
+                      <div class="cert-card">
+                              <span class="seal">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
+                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                            <div class="cert-body">
+                <div class="ct">C.I.T — Dow University Vocational Training Center (D.U.H.S)</div>
+                                              </div>
+            </div>
+                      <div class="cert-card">
+                              <span class="seal">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
+                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                            <div class="cert-body">
+                <div class="ct">Basic of JavaScript Programming</div>
+                                              </div>
+            </div>
+                      <div class="cert-card">
+                              <span class="seal">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
+                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                            <div class="cert-body">
+                <div class="ct">Professional Networking for Career Growth</div>
+                                              </div>
+            </div>
+                      <div class="cert-card">
+                              <span class="seal">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
+                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                            <div class="cert-body">
+                <div class="ct">JavaScript Developer Certificate</div>
+                                              </div>
+            </div>
+                      <div class="cert-card">
+                              <span class="seal">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
+                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                            <div class="cert-body">
+                <div class="ct">Cybersecurity Foundations</div>
+                                              </div>
             </div>
                   </div>
-        <div>
-          <ul class="course-list">
-                          <li><span class="chk">✓</span> Cyber Security &amp; Ethical Hacking — NED University <em style="color:var(--muted); font-style:normal;">(in progress)</em></li>
-                          <li><span class="chk">✓</span> Mobile Application &amp; Web Development — Aptech Learning Center</li>
-                          <li><span class="chk">✓</span> Office Automation — Indus Public College</li>
-                          <li><span class="chk">✓</span> C.I.T — Dow University Vocational Training Center (D.U.H.S)</li>
-                      </ul>
-        </div>
       </div>
-    </div>
+          </div>
   </section>
 
   <!-- TESTIMONIALS -->
@@ -877,10 +1293,26 @@
 
       <div class="tst-grid">
                   <div class="tst-card">
+            <p class="tst-quote">“I just wanted to start by saying how truly impressed I am with the work you’ve done on the Bestingle website. The last one was a mess, to say the least. The site is beautiful, and your expert direction, incredible patience, and speed in bringing this vision to life have made the entire process such a pleasure. Thank you for your attention to detail and for guiding this project with such care—it really shows in the results.
+
+I’ve been testing the site on mobile and desktop, and everything looks fantastic so far. I’ll continue testing, but I couldn’t be happier with how things are coming together.”</p>
+            <div class="tst-who">
+              <span class="av">B</span>
+              <span><span class="nm">Bestingle</span> · <span class="rl">CEO, Bestingle</span></span>
+            </div>
+          </div>
+                  <div class="tst-card">
+            <p class="tst-quote">“Working with Muhammad Asif has been an excellent experience from start to finish. They took my existing design and rebuilt it in Webflow with incredible attention to detail, professionalism, and creativity. Communication was smooth, clear, and very professional. If you’re looking for a reliable Webflow expert who can turn designs into a high-quality, professional website with an expert touch, I highly recommend working with them. I would absolutely work with them again!”</p>
+            <div class="tst-who">
+              <span class="av">V</span>
+              <span><span class="nm">Virtual Mike</span> · <span class="rl">CEO, Virtual Mike</span></span>
+            </div>
+          </div>
+                  <div class="tst-card">
             <p class="tst-quote">“Muhammad is an exceptional team lead and developer. His expertise across multiple CMS platforms (WordPress, Shopify, HubSpot, Wix) is truly impressive. He delivered high-quality solutions consistently and led his team with excellence.”</p>
             <div class="tst-who">
               <span class="av">J</span>
-              <span><span class="nm">James Patterson</span> · <span class="rl">CEO, Media Revolution</span></span>
+              <span><span class="nm">James Patterson</span> · <span class="rl">CEO, Texpertdeals</span></span>
             </div>
           </div>
                   <div class="tst-card">
@@ -967,7 +1399,7 @@
   // project filters
   (function(){
     const btns = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.proj-card');
+    const cards = document.querySelectorAll('#projGrid .proj-card');  // sirf projects grid — vibe cards ko na chhue
     btns.forEach(btn=>{
       btn.addEventListener('click', ()=>{
         btns.forEach(b=>b.classList.remove('active'));
