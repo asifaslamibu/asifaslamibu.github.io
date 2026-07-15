@@ -132,8 +132,9 @@
   .edu-item .deg{font-weight:700; font-size:15.5px; margin-bottom:4px; line-height:1.3;}
   .edu-item .school{color:var(--accent-2); font-size:13.5px; font-family:var(--mono);}
   .edu-item .yr{color:var(--muted); font-size:12px; font-family:var(--mono); margin-top:6px;}
-  .edu-item .edu-cert{display:block; margin-top:12px; border:1px solid var(--line); border-radius:8px; overflow:hidden; max-height:130px;}
-  .edu-item .edu-cert img{width:100%; max-height:130px; object-fit:cover; object-position:top center;}
+  .edu-item .edu-cert{display:block; margin-top:12px; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  .edu-item .edu-cert img{width:100%; height:auto; display:block;}   /* full image, no crop */
+  .edu-item .edu-cert-pdf{display:inline-block; margin-top:12px; font-family:var(--mono); font-size:12.5px; font-weight:600; color:var(--accent-2);}
   .cert-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px;}
   .cert-card{display:flex; align-items:flex-start; gap:13px; border:1px solid var(--line); background:var(--surface);
     border-radius:10px; padding:15px 16px; transition:border-color .15s ease, transform .15s ease;}
@@ -144,8 +145,8 @@
   .cert-card .cn{color:var(--muted); font-size:12px; font-family:var(--mono); margin-top:3px;}
   .cert-card .cn.view{color:var(--accent-2); font-weight:600;}
   .cert-card.has-img{flex-direction:column; align-items:stretch; gap:0; padding:0; overflow:hidden;}
-  .cert-card.has-img .cert-thumb{display:block; height:150px; background:var(--paper); border-bottom:1px solid var(--line);}
-  .cert-card.has-img .cert-thumb img{width:100%; height:100%; object-fit:cover; object-position:top center;}
+  .cert-card.has-img .cert-thumb{display:block; background:var(--paper); border-bottom:1px solid var(--line);}
+  .cert-card.has-img .cert-thumb img{width:100%; height:auto; display:block;}   /* full image, no crop */
   .cert-card.has-img .cert-body{padding:14px 16px;}
   .tst-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
   @media (max-width:700px){ .tst-grid{grid-template-columns:1fr;} }
@@ -1191,96 +1192,82 @@
       </div>
       
             <div class="cert-block">
-        <div class="col-head">Certifications <span class="n">· 8</span></div>
+        <div class="col-head">Certifications <span class="n">· 9</span></div>
         <div class="cert-grid">
+                      <a class="cert-card has-img" href="https://www.credly.com/badges/f3284856-c3cc-4c6e-a92e-42473bb8cf79" target="_blank" rel="noopener">
+                              <span class="cert-thumb"><img src="uploads/cert_3f06c6e38bb1.png" alt="Introduction to Cybersecurity" loading="lazy"></span>
+                            <div class="cert-body">
+                <div class="ct">Introduction to Cybersecurity</div>
+                <div class="cn">Completed</div>                <div class="cn view">View credential ↗</div>              </div>
+            </a>
                       <div class="cert-card">
                               <span class="seal">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
-                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
+                                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
+                      <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                                  </span>
                             <div class="cert-body">
                 <div class="ct">Cyber Security &amp; Ethical Hacking — NED University</div>
                 <div class="cn">(in progress)</div>                              </div>
             </div>
                       <div class="cert-card">
                               <span class="seal">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
-                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
+                                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
+                      <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                                  </span>
                             <div class="cert-body">
                 <div class="ct">Mobile Application &amp; Web Development — Aptech Learning Center</div>
                                               </div>
             </div>
                       <div class="cert-card">
                               <span class="seal">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
-                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
+                                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
+                      <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                                  </span>
                             <div class="cert-body">
                 <div class="ct">Office Automation — Indus Public College</div>
                                               </div>
             </div>
                       <div class="cert-card">
                               <span class="seal">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
-                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
+                                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
+                      <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                                  </span>
                             <div class="cert-body">
                 <div class="ct">C.I.T — Dow University Vocational Training Center (D.U.H.S)</div>
                                               </div>
             </div>
-                      <div class="cert-card">
-                              <span class="seal">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
-                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
+                      <a class="cert-card has-img" href="uploads/cert_25a267c6bf6d.jpg" target="_blank" rel="noopener">
+                              <span class="cert-thumb"><img src="uploads/cert_25a267c6bf6d.jpg" alt="Basic of JavaScript Programming" loading="lazy"></span>
                             <div class="cert-body">
                 <div class="ct">Basic of JavaScript Programming</div>
                                               </div>
-            </div>
-                      <div class="cert-card">
-                              <span class="seal">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
-                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
+            </a>
+                      <a class="cert-card has-img" href="https://www.life-global.org/certificate/03a410f5-aba2-4d71-bae7-3567e293dc94" target="_blank" rel="noopener">
+                              <span class="cert-thumb"><img src="uploads/cert_bae4bae1e4fc.jpg" alt="Professional Networking for Career Growth" loading="lazy"></span>
                             <div class="cert-body">
                 <div class="ct">Professional Networking for Career Growth</div>
-                                              </div>
-            </div>
-                      <div class="cert-card">
-                              <span class="seal">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
-                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
+                <div class="cn">Completed</div>                <div class="cn view">View credential ↗</div>              </div>
+            </a>
+                      <a class="cert-card has-img" href="uploads/cert_136e3f3e418e.jpg" target="_blank" rel="noopener">
+                              <span class="cert-thumb"><img src="uploads/cert_136e3f3e418e.jpg" alt="JavaScript Developer Certificate" loading="lazy"></span>
                             <div class="cert-body">
                 <div class="ct">JavaScript Developer Certificate</div>
-                                              </div>
-            </div>
-                      <div class="cert-card">
-                              <span class="seal">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="8.5" r="5.2" stroke="currentColor" stroke-width="2"/>
-                    <path d="M8.4 12.6L7 22l5-2.6L17 22l-1.4-9.4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
+                <div class="cn">Completed</div>                              </div>
+            </a>
+                      <a class="cert-card has-img" href="https://www.linkedin.com/learning/certificates/f1d1fee11a3973e2d3ec7de63dd48cf00fd8d4a9bc7fa33bc976f2e5d8fef08b?trk=share_certificate&amp;lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_certifications_details%3BgKJdgZvIRECj7mzLX8ej%2Bw%3D%3D" target="_blank" rel="noopener">
+                              <span class="cert-thumb"><img src="uploads/cert_fc58ddf73c2a.jpg" alt="Cybersecurity Foundations" loading="lazy"></span>
                             <div class="cert-body">
                 <div class="ct">Cybersecurity Foundations</div>
-                                              </div>
-            </div>
+                <div class="cn">Completed</div>                <div class="cn view">View credential ↗</div>              </div>
+            </a>
                   </div>
       </div>
           </div>
