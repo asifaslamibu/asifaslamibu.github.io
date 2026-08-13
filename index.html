@@ -135,6 +135,22 @@
   .edu-item .edu-cert{display:block; margin-top:12px; border:1px solid var(--line); border-radius:8px; overflow:hidden;}
   .edu-item .edu-cert img{width:100%; height:auto; display:block;}   /* full image, no crop */
   .edu-item .edu-cert-pdf{display:inline-block; margin-top:12px; font-family:var(--mono); font-size:12.5px; font-weight:600; color:var(--accent-2);}
+  /* ---------- github stats ---------- */
+  .gh-stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:26px;}
+  @media (max-width:640px){ .gh-stats{grid-template-columns:repeat(2,1fr);} }
+  .gh-stat{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:20px 16px; text-align:center;}
+  .gh-stat .n{font-family:var(--mono); font-weight:800; font-size:26px; color:var(--ink);}
+  .gh-stat .l{font-family:var(--mono); font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-top:4px;}
+  .gh-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media (max-width:860px){ .gh-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .gh-grid{grid-template-columns:1fr;} }
+  .gh-card{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:18px; display:flex; flex-direction:column; gap:9px; transition:transform .16s ease, box-shadow .16s ease;}
+  .gh-card:hover{transform:translateY(-4px); box-shadow:0 16px 30px -18px rgba(20,24,31,.35);}
+  .gh-card .rn{font-family:var(--mono); font-weight:700; font-size:14.5px; color:var(--accent-2); display:flex; align-items:center; gap:7px; word-break:break-word;}
+  .gh-card .rd{font-size:13px; color:var(--muted); line-height:1.5; flex:1;}
+  .gh-card .rm{display:flex; gap:16px; font-family:var(--mono); font-size:12px; color:var(--muted); align-items:center; flex-wrap:wrap;}
+  .gh-card .dot{width:11px; height:11px; border-radius:50%; display:inline-block;}
+  .gh-loading{color:var(--muted); font-family:var(--mono); font-size:13px; grid-column:1/-1;}
   .cert-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px;}
   .cert-card{display:flex; align-items:flex-start; gap:13px; border:1px solid var(--line); background:var(--surface);
     border-radius:10px; padding:15px 16px; transition:border-color .15s ease, transform .15s ease;}
@@ -1094,6 +1110,22 @@
           </div>
   </section>
 
+  <!-- GITHUB -->
+  <section id="github">
+    <div class="wrap">
+      <div class="eyebrow">04b · Open Source</div>
+      <h2 class="title">On GitHub.</h2>
+      <p class="lede">Live stats and top repositories, straight from my GitHub.</p>
+
+      <div class="gh-stats" id="ghStats"></div>
+      <div class="gh-grid" id="ghRepos"><p class="gh-loading">Loading repositories…</p></div>
+
+            <p style="margin-top:28px; font-family:var(--mono); font-size:13px;">
+        <a href="https://github.com/asifaslamibu" target="_blank" rel="noopener" style="color:var(--accent-2); font-weight:600;">View all repositories on GitHub →</a>
+      </p>
+    </div>
+  </section>
+
   <!-- VIBE CODING -->
   <section id="vibe">
     <div class="wrap">
@@ -1422,6 +1454,43 @@ I’ve been testing the site on mobile and desktop, and everything looks fantast
         const f = btn.dataset.filter;
         cards.forEach(c=>{ c.style.display = (f==='all' || c.dataset.cat===f) ? '' : 'none'; });
       });
+    });
+  })();
+
+  // GitHub live stats + top repositories (GitHub public API)
+  (function(){
+    const user = "asifaslamibu";
+    const statsEl = document.getElementById('ghStats');
+    const reposEl = document.getElementById('ghRepos');
+    if(!user || !statsEl || !reposEl) return;
+    const colors = {JavaScript:'#f1e05a',TypeScript:'#3178c6',HTML:'#e34c26',CSS:'#563d7c',SCSS:'#c6538c',PHP:'#4F5D95',Python:'#3572A5',Java:'#b07219','C#':'#178600','C++':'#f34b7d',C:'#555555',Shell:'#89e051',Vue:'#41b883',Ruby:'#701516',Go:'#00ADD8',Dart:'#00B4AB',Blade:'#f7523f'};
+    const esc = s => (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const tile = (n,l) => '<div class="gh-stat"><div class="n">'+n+'</div><div class="l">'+l+'</div></div>';
+    function card(r){
+      const c = colors[r.language] || '#8b95a6';
+      const lang = r.language ? '<span><span class="dot" style="background:'+c+'"></span>'+esc(r.language)+'</span>' : '';
+      return '<a class="gh-card" href="'+esc(r.html_url)+'" target="_blank" rel="noopener">'
+        + '<div class="rn">📦 '+esc(r.name)+'</div>'
+        + '<div class="rd">'+(r.description?esc(r.description):'No description provided.')+'</div>'
+        + '<div class="rm">'+lang+'<span>★ '+(r.stargazers_count||0)+'</span><span>⑂ '+(r.forks_count||0)+'</span></div>'
+        + '</a>';
+    }
+    Promise.all([
+      fetch('https://api.github.com/users/'+user).then(r=>r.ok?r.json():null),
+      fetch('https://api.github.com/users/'+user+'/repos?per_page=100&sort=pushed').then(r=>r.ok?r.json():[])
+    ]).then(([u, repos])=>{
+      repos = Array.isArray(repos) ? repos : [];
+      const stars = repos.reduce((s,r)=>s+(r.stargazers_count||0),0);
+      if(u){
+        statsEl.innerHTML = tile(u.public_repos,'Repositories') + tile(stars,'Stars')
+          + tile(u.followers,'Followers') + tile(u.following,'Following');
+      }
+      const top = repos.filter(r=>!r.fork)
+        .sort((a,b)=> (b.stargazers_count-a.stargazers_count) || (new Date(b.pushed_at)-new Date(a.pushed_at)))
+        .slice(0,6);
+      reposEl.innerHTML = top.length ? top.map(card).join('') : '<p class="gh-loading">No public repositories to show yet.</p>';
+    }).catch(function(){
+      reposEl.innerHTML = '<p class="gh-loading">Couldn\'t load GitHub data right now — visit my GitHub instead.</p>';
     });
   })();
 
